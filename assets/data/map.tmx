@@ -5,12 +5,19 @@
  </tileset>
  <layer name="Map" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0cEJgDAMQNHOKHSIjusOuocnIQQpCvEgvgf/lOSU1gAAAPijNTWb874ltae2UJ6dUaeH8m9mxTvqjFB/ULyjzrjozo4/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8CUH0cgiwg==
+   eJzt0cEJhDAQQFGL2ia8Chbg0W61CPtY9uQwBKOgIJv34J8mYQLpOgAAAFq0pqLlYMYzhlQf2lL9DZXU5i0ZQ/lvjor3ovyHv6ZK7ObQeKF4L9sef/X/mgudOVM6BwAAAEDdx45X7QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA2vEFvxIrTQ==
   </data>
  </layer>
  <layer name="nocollide" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztzrENgCAQhlHmwA2E6P5rOJFXUBlCCYm8l3zV/cWlBAAA+8rRsfqJjZytEtXO/YrutmG+59Po1tsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPzFC8cpCZw=
+   eJztzrENgCAQhlHmgA3U4P5rOJFXUFAYCwuI4b3kq/4rLiUAAFhXjsrsJxaytfboeNhrdLYbxru63ravAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8xQ1qBRHQ
   </data>
  </layer>
+ <objectgroup name="Spike" width="100" height="100">
+  <object gid="80" x="700" y="275"/>
+  <object gid="80" x="725" y="275"/>
+  <object gid="80" x="750" y="275"/>
+  <object gid="80" x="775" y="275"/>
+  <object gid="80" x="800" y="275"/>
+ </objectgroup>
 </map>

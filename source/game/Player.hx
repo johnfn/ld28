@@ -3,6 +3,7 @@ package game;
 import flash.display.Bitmap;
 import flash.events.Event;
 import flash.net.URLRequest;
+import flixel.effects.particles.FlxEmitter;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -130,6 +131,38 @@ class Player extends FlxSprite {
 		loader.load(new URLRequest("../../../../../../../assets/images/tileset.png"));
 	}
 
+	private var safeLocation:{point:FlxPoint, map:{x:Int, y:Int}};
+	private function createRespawnPoint() {
+		safeLocation = {point: new FlxPoint(this.x, this.y), map: {x:Reg.mapX, y:Reg.mapY}};
+	}
+
+	private function explode() {
+		var explosion:FlxEmitter = new FlxEmitter(this.x, this.y, 70);
+		explosion.makeParticles("images/boomparticle.png", 20, 0, 2);
+		explosion.endAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds<Float>(0.0, 0.1);
+		explosion.start(true, 2);
+		FlxG.state.add(explosion);
+	}
+
+	private function respawn() {
+		explode();
+
+		this.x = safeLocation.point.x;
+		this.y = safeLocation.point.y;
+
+		// TODO load map
+
+		// TODO smooth scroll camera back
+
+		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
+	}
+
+	private function touchingMap(o1:FlxObject, o2:FlxObject): Void {
+		if (this.isTouching(FlxObject.FLOOR)) {
+			createRespawnPoint();
+		}
+	}
+
 	public override function update() {
 		super.update();
 
@@ -142,7 +175,12 @@ class Player extends FlxSprite {
 			this.facing = FlxObject.RIGHT;
 		}
 
-		Reg.map.collideWithLevel(this);
+		if (FlxG.overlap(this, Reg.spikes)) {
+			respawn();
+		}
+
+		Reg.map.collideWithLevel(this, touchingMap);
+
 
 		this.velocity.y += 10;
 		if (FlxG.keys.pressed.W && this.isTouching(FlxObject.FLOOR)) {

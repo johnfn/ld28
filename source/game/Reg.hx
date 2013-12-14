@@ -16,6 +16,8 @@ class Reg {
 
 	static public var inactives:FlxGroup = new FlxGroup();
 
+	static public var spikes:FlxGroup = new FlxGroup();
+
 	/** Current game state. */
 	static public var state:FlxState; 
 

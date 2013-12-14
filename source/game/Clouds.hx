@@ -6,6 +6,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxGradient;
@@ -14,7 +15,7 @@ import flixel.util.FlxMath;
 import flixel.addons.ui.FlxInputText;
 import flixel.util.FlxPoint;
 
-class Clouds extends FlxBasic {
+class Clouds extends FlxSpriteGroup {
 	private var clouds:Array<{sprite: FlxSprite, speed: Float}>;
 	public function new(x:Int, y:Int) {
 		super();
@@ -51,7 +52,7 @@ class Clouds extends FlxBasic {
 		var cloud:FlxSprite = new FlxSprite(xPosition, yPosition);
 		cloud.loadGraphic("images/clouds.png", true, false, 300, 200);
 		cloud.animation.randomFrame(); // choose random cloud
-		FlxG.state.add(cloud);
+		this.add(cloud);
 
 		this.clouds.push({sprite: cloud, speed: speed});
 	}
