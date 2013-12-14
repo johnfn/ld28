@@ -14,14 +14,13 @@ import flixel.util.FlxMath;
 
 import flixel.addons.ui.FlxInputText;
 import flixel.util.FlxPoint;
-import flixel.FlxObject;
 
 import flash.display.Loader;
+import game.MapAwareSprite;
 
-class Player extends FlxSprite {
+class FancySprite extends MapAwareSprite {
 	/** test */
 	public var tweakable:Array<String>;
-	public var derpus:Int = 44;
 
 	public var menuVisible = false;
 
@@ -33,12 +32,8 @@ class Player extends FlxSprite {
 
 		this.tweakable = ["x", "y", "velocity", "drag"];
 
-		this.loadGraphic("images/robot.png", true, true, Reg.TILE_WIDTH, Reg.TILE_HEIGHT);
-
-		this.animation.add("idle", [0, 1, 2, 3, 4, 5], 8, true);
-		this.animation.play("idle");
-
 		this.drag.x = 2000;
+		this.drag.y = 2000;
 
 		buildDebuggingMenu();
 	}	
@@ -73,8 +68,6 @@ class Player extends FlxSprite {
 			}
 
 			this.debuggingItems.push(dbg);
-
-			trace(dbg.height);
 
 			currentHeight += dbg.height + 10;
 		}	
@@ -119,7 +112,7 @@ class Player extends FlxSprite {
 
 	public function reloadGraphic() {
 		var loader:Loader = new Loader();
-		var sprite:Player = this;
+		var sprite:FancySprite = this;
 
 		function loadComplete(e:Event) {
 		    var loadedBitmap:Bitmap = cast(e.currentTarget.loader.content, Bitmap);
@@ -130,30 +123,14 @@ class Player extends FlxSprite {
 		loader.load(new URLRequest("../../../../../../../assets/images/tileset.png"));
 	}
 
+
 	public override function update() {
 		super.update();
-
-		if (FlxG.keys.pressed.A) {
-			this.velocity.x = -200;
-			this.facing = FlxObject.LEFT;
-		} 
-		if (FlxG.keys.pressed.D) {
-			this.velocity.x = 200;
-			this.facing = FlxObject.RIGHT;
-		}
-
-		Reg.map.collideWithLevel(this);
-
-		this.velocity.y += 10;
-		if (FlxG.keys.pressed.W && this.isTouching(FlxObject.FLOOR)) {
-			this.velocity.y = -350;
-		}
 
 		if (FlxG.keys.justPressed.R) {
 			reloadGraphic();
 		}
 
-#if debug
 		if (this.menuVisible) {
 			updateDebuggingMenu();
 		}
@@ -165,7 +142,5 @@ class Player extends FlxSprite {
 				hideDebuggingMenu();
 			}
 		}
-#end
-		// this.acceleration.y = 100;
 	}
 }

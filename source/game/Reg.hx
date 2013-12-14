@@ -25,4 +25,7 @@ class Reg {
 
 	static public var mapWidth:Int = 25 * 30;
 	static public var mapHeight:Int = 25 * 30;
+
+	static public var TILE_WIDTH:Int = 25;
+	static public var TILE_HEIGHT:Int = 25;
 }

@@ -52,9 +52,9 @@ class PlayState extends FlxState {
 
 	override public function create():Void {
 		// Set a background color
-		FlxG.cameras.bgColor = 0xff131c1b;
+		FlxG.cameras.bgColor = 0xff364964;
 		// Show the mouse (in case it hasn't been disabled)
-		#if !FLX_NO_MOUSE
+		#if !FLX_NO_MOUSE30
 		FlxG.mouse.show();
 		#end
 
@@ -65,20 +65,21 @@ class PlayState extends FlxState {
 
 		Reg.state = this;
 
-		var p:Player = new Player(50, 50);
-		this.add(p);
+		this.add(new Clouds(0, 0));
 
         level = new TiledLevel("data/map.tmx", "images/tileset.png", 25);
         add(level.foregroundTiles);
         add(level.backgroundTiles);
         level.loadObjects(this);
 
+		var p:Player = new Player(50, 50);
+		this.add(p);
+
         Reg.map = level;
 
         Reg.player = p;
 
         FlxG.camera.follow(Reg.player, FlxCamera.STYLE_PLATFORMER);
-
 	}
 
 	/**

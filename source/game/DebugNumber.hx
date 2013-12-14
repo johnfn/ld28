@@ -37,7 +37,7 @@ class DebugNumber extends DebugVariable {
 
 	public override function updateValues() {
 		if (!this.input.hasFocus) {
-			this.input.text = Reflect.field(this.inspectedObject, this.fieldName);
+			this.input.text = Std.string(Reflect.field(this.inspectedObject, this.fieldName));
 		}
 	}
 

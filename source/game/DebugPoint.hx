@@ -45,11 +45,11 @@ class DebugPoint extends DebugVariable {
 
 	public override function updateValues() {
 		if (!this.firstInput.hasFocus) {
-			this.firstInput.text  = Reflect.field(Reflect.field(this.inspectedObject, this.fieldName), "x");
+			this.firstInput.text  = Std.string(Reflect.field(Reflect.field(this.inspectedObject, this.fieldName), "x"));
 		}
 
 		if (!this.secondInput.hasFocus) {
-			this.secondInput.text = Reflect.field(Reflect.field(this.inspectedObject, this.fieldName), "y");
+			this.secondInput.text = Std.string(Reflect.field(Reflect.field(this.inspectedObject, this.fieldName), "y"));
 		}
 	}
 

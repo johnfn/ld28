@@ -12,7 +12,7 @@ import flixel.util.FlxMath;
 import flixel.addons.ui.FlxInputText;
 import flixel.util.FlxPoint;
 
-class Ball extends MapAwareSprite {
+class Ball extends FancySprite {
 	public function new(x:Int, y:Int) {
 		super(x, y);
 

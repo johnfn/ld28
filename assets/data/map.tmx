@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="25" tileheight="25">
  <tileset firstgid="1" name="tileset" tilewidth="25" tileheight="25">
-  <image source="../images/tileset.png" width="50" height="50"/>
+  <image source="../images/tileset.png" width="500" height="500"/>
  </tileset>
  <layer name="Map" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt1lEKgCAQBUBj739nf/tw0TJJZAYWREVqH4ilANASf38ATdfAeq94J+tl1tdsPm5Vkj0niE6tNtLXSManZTJyL6z+55nzT8tjxpfZyWQvM5nKYy/eW3vyHgYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4rgLV+gBg
+   eJzt0cEJgDAMQNHOKHSIjusOuocnIQQpCvEgvgf/lOSU1gAAAPijNTWb874ltae2UJ6dUaeH8m9mxTvqjFB/ULyjzrjozo4/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8CUH0cgiwg==
   </data>
  </layer>
  <layer name="nocollide" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt1sEJwCAABEGD/fecjwUYCLqPGbgK9nNjAMD/5hodepw1N8YZz+a+0rBDixY9WvRo0aNFjwbfuEOHFj0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOC+Fz/VAE0=
+   eJztzrENgCAQhlHmwA2E6P5rOJFXUBlCCYm8l3zV/cWlBAAA+8rRsfqJjZytEtXO/YrutmG+59Po1tsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPzFC8cpCZw=
   </data>
  </layer>
- <objectgroup name="Ball" width="100" height="100">
-  <object gid="4" x="125" y="100"/>
-  <object gid="4" x="75" y="150"/>
- </objectgroup>
 </map>
