@@ -17,22 +17,20 @@ import flixel.util.FlxPoint;
 class DialogBox extends FlxObject {
 	var box:FlxSprite;
 	var textbox:FlxText;
-	var text:Array<String>;
+	var allDialog:Array<String>;
 	var doneCB:Void -> Void;
 
 	public static var onlyDialog:DialogBox;
 
-	public function new(text:Array<String>) {
+	public function new(allDialog:Array<String>) {
 		super(125, 300);
 
 		box = new FlxSprite(125, 300);
-		textbox = new FlxText(150, 325, 350, text[0], 14);
+		textbox = new FlxText(150, 325, 350, "", 14);
 		textbox.setBorderStyle(FlxText.BORDER_SHADOW, 0, 3);
 		box.loadGraphic("images/dialogbox.png");
 
-		text.splice(0, 1);
-
-		this.text = text;
+		this.allDialog = allDialog;
 
 		Reg.state.add(box);
 		Reg.state.add(textbox);
@@ -46,8 +44,10 @@ class DialogBox extends FlxObject {
 	}
 
 	private function advanceDialog() {
-		if (text.length > 0) {
-			textbox.text = text.splice(0, 1)[0];
+		allDialog.splice(0, 1);
+		
+		if (allDialog.length > 0) {
+			textbox.text = "";
 		} else {
 			Reg.mode = Reg.NORMAL_MODE;
 			textbox.visible = false;
@@ -62,8 +62,16 @@ class DialogBox extends FlxObject {
 	public override function update() {
 		super.update();
 
-		if (FlxG.keys.justPressed.Z) {
-			advanceDialog();
+		if (textbox.text.length != allDialog[0].length) {
+			if (FlxG.keys.justPressed.Z) {
+				textbox.text = allDialog[0];
+			} else {
+				textbox.text = allDialog[0].substr(0, textbox.text.length + 1);
+			}
+		} else {
+			if (FlxG.keys.justPressed.Z) {
+				advanceDialog();
+			}
 		}
 	}
 }
