@@ -24,6 +24,7 @@ class Interactable extends FancySprite {
 	private var direction:Float = 1;
 
 	public var showBouncer:Bool = true;
+	public var scaleBouncer:Bool = true;
 
 	public function new(x:Int, y:Int) {
 		super(x, y);
@@ -58,19 +59,24 @@ class Interactable extends FancySprite {
 	}
 
 	private function bounceInteract() {
-		percentage += direction / BOUNCE_SPEED;
-		if (percentage > highestInteractY) {
-			percentage = highestInteractY;
-			direction *= -1;
+		if (scaleBouncer) {
+			percentage += direction / BOUNCE_SPEED;
+			if (percentage > highestInteractY) {
+				percentage = highestInteractY;
+				direction *= -1;
+			}
+
+			if (percentage < lowestInteractY) {
+				percentage = lowestInteractY;
+				direction *= -1;
+			}
+
+			interact.scale.x = FlxMath.lerp(lowestInteractY, highestInteractY, percentage);
+			interact.scale.y = FlxMath.lerp(lowestInteractY, highestInteractY, percentage);
 		}
 
-		if (percentage < lowestInteractY) {
-			percentage = lowestInteractY;
-			direction *= -1;
-		}
-
-		interact.scale.x = FlxMath.lerp(lowestInteractY, highestInteractY, percentage);
-		interact.scale.y = FlxMath.lerp(lowestInteractY, highestInteractY, percentage);
+		interact.x = this.x;
+		interact.y = this.y - this.height - 12;
 	}
 
 	public override function update() {

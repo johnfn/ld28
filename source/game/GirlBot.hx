@@ -33,6 +33,8 @@ class GirlBot extends game.Interactable {
 		Reg.girls.add(this);
 
 		this.animation.play("idle");
+
+		this.scaleBouncer = false;
 	}
 
 	public function triggerConversation(conversation:Array<String>) {
@@ -64,6 +66,13 @@ class GirlBot extends game.Interactable {
 
 	public override function update() {
 		super.update();
+
+		this.velocity.y += 60;
+		Reg.map.collideWithLevel(this);
+
+		if (this.isTouching(flixel.FlxObject.FLOOR) && game.Interactable.getInteractor() == this) {
+			this.velocity.y = -500;
+		}
 
 		if (isFollowingPlayer) {
 			// wats the law of demeter

@@ -214,7 +214,6 @@ class Player extends FlxSprite {
 
 		Reg.map.collideWithLevel(this, touchingMap);
 
-
 		this.velocity.y += 10;
 		if ((FlxG.keys.pressed.W  || FlxG.keys.pressed.UP || FlxG.keys.pressed.X) && this.isTouching(FlxObject.FLOOR)) {
 			this.velocity.y = -350;
