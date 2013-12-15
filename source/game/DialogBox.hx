@@ -18,6 +18,7 @@ class DialogBox extends FlxObject {
 	var box:FlxSprite;
 	var textbox:FlxText;
 	var text:Array<String>;
+	var doneCB:Void -> Void;
 
 	public static var onlyDialog:DialogBox;
 
@@ -40,6 +41,10 @@ class DialogBox extends FlxObject {
 		DialogBox.onlyDialog = this;
 	}
 
+	public function addDoneCB(cb:Void -> Void) {
+		this.doneCB = cb;
+	}
+
 	private function advanceDialog() {
 		if (text.length > 0) {
 			textbox.text = text.splice(0, 1)[0];
@@ -49,13 +54,13 @@ class DialogBox extends FlxObject {
 			box.visible = false;
 
 			FlxG.state.remove(this);
+
+			this.doneCB();
 		}
 	}
 
 	public override function update() {
 		super.update();
-
-		trace(Math.random());
 
 		if (FlxG.keys.justPressed.Z) {
 			advanceDialog();

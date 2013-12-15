@@ -23,6 +23,8 @@ class Interactable extends FancySprite {
 	private var percentage:Float = 0;
 	private var direction:Float = 1;
 
+	public var showBouncer:Bool = true;
+
 	public function new(x:Int, y:Int) {
 		super(x, y);
 
@@ -72,7 +74,7 @@ class Interactable extends FancySprite {
 	}
 
 	public override function update() {
-		if (FlxMath.distanceBetween(this, Reg.player) <= VISIBLE_RANGE) {
+		if (FlxMath.distanceBetween(this, Reg.player) <= VISIBLE_RANGE && showBouncer) {
 			interact.visible = true;
 
 			bounceInteract();
