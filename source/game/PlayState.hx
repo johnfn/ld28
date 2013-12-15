@@ -66,8 +66,8 @@ class PlayState extends FlxState {
 
         if (change || forceUpdate) {
             FlxG.camera.setBounds(Reg.mapX * Reg.mapWidth, Reg.mapY * Reg.mapHeight, Reg.mapWidth, Reg.mapHeight, true);
-            scenery.x = FlxG.camera.x;
-            scenery.y = FlxG.camera.y;
+            scenery.x = FlxG.camera.bounds.x;
+            scenery.y = FlxG.camera.bounds.y;
             Reg.player.safeLocation = null;
         }
     }
@@ -161,7 +161,8 @@ class PlayState extends FlxState {
 			for (ent in this.members) {
 				if (Std.is(ent, game.MapAwareSprite)) {
 					if (!Std.is(ent, GirlBot) || (Std.is(ent, game.GirlBot) && !Reg.player.girlFound)) { // exempt!
-			        	ent.active = cast(ent, game.MapAwareSprite).onCurrentMap();
+						var fs:FlxSprite = cast(ent, FlxSprite);
+			        	ent.active = Reg.withinBoundaries(fs.x, fs.y);
 			        }
 		        }
 			}
