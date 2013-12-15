@@ -13,6 +13,8 @@ import flixel.addons.ui.FlxInputText;
 import flixel.util.FlxPoint;
 
 class GirlBot extends game.Interactable {
+	private var isFollowingPlayer:Bool = false;
+
 	public function new(x:Int, y:Int) {
 		super(x, y);
 
@@ -26,6 +28,14 @@ class GirlBot extends game.Interactable {
 
 	public override function update() {
 		super.update();
+
+		if (isFollowingPlayer) {
+			// wats the law of demeter
+			if (Reg.player.lastPositions.length > 0) {	
+				this.x = Reg.player.lastPositions[0].x;
+				this.y = Reg.player.lastPositions[0].y;
+			}
+		}
 	}
 
 	public override function actionString():String {
@@ -33,6 +43,8 @@ class GirlBot extends game.Interactable {
 	}
 
 	public override function performAction():Void {
-		new game.DialogBox(["GIRL: Hello!"]);
+		FlxG.state.add(new game.DialogBox(["GIRL: Hello!"]));
+
+		isFollowingPlayer = true;
 	}
 }

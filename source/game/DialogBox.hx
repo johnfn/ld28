@@ -36,6 +36,7 @@ class DialogBox extends FlxObject {
 		Reg.state.add(box);
 		Reg.state.add(textbox);
 
+        Reg.mode = Reg.DIALOG_MODE;
 		DialogBox.onlyDialog = this;
 	}
 
@@ -46,11 +47,15 @@ class DialogBox extends FlxObject {
 			Reg.mode = Reg.NORMAL_MODE;
 			textbox.visible = false;
 			box.visible = false;
+
+			FlxG.state.remove(this);
 		}
 	}
 
 	public override function update() {
 		super.update();
+
+		trace(Math.random());
 
 		if (FlxG.keys.justPressed.Z) {
 			advanceDialog();

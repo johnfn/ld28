@@ -29,9 +29,12 @@ class Player extends FlxSprite {
 	private var debuggingMenu:FlxSprite;
 	private var debuggingItems:Array<DebugVariable>;
 
+	public var lastPositions:Array<FlxPoint>;
+
 	public function new(x:Int, y:Int) {
 		super(x, y);
 
+		this.lastPositions = [];
 		this.tweakable = ["x", "y", "velocity", "drag"];
 
 		this.loadGraphic("images/robot.png", true, true, Reg.TILE_WIDTH, Reg.TILE_HEIGHT);
@@ -167,8 +170,18 @@ class Player extends FlxSprite {
 		}
 	}
 
+	private function updateFollowTrail() {
+		if (this.lastPositions.length > 50) {
+			this.lastPositions.splice(0, 1);
+		}
+
+		this.lastPositions.push(new FlxPoint(this.x, this.y));
+	}
+
 	public override function update() {
 		super.update();
+
+		updateFollowTrail();
 
 		if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
 			this.velocity.x = -200;
@@ -177,6 +190,16 @@ class Player extends FlxSprite {
 		if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) {
 			this.velocity.x = 200;
 			this.facing = FlxObject.RIGHT;
+		}
+
+		if (FlxG.keys.justPressed.Z) {
+			var i:game.Interactable = game.Interactable.getInteractor();
+			if (i != null) {
+				// this is to stop the dialog from also eating the z key, meaning no one ever gets to see it. <_>
+				FlxG.keyboard.reset();
+				i.performAction();
+				this.lastPositions = [];
+			}
 		}
 
 		if (FlxG.overlap(this, Reg.spikes)) {

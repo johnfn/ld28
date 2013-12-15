@@ -44,6 +44,17 @@ class Interactable extends FancySprite {
 
 	}
 
+	public static function getInteractor():Interactable {
+		for (interactor in Reg.interactors.members) {
+			var i:game.Interactable = cast(interactor, Interactable);
+			if (FlxMath.distanceBetween(i, Reg.player) <= Interactable.VISIBLE_RANGE) {
+				return i;
+			}
+		}
+
+		return null;
+	}
+
 	private function bounceInteract() {
 		percentage += direction / BOUNCE_SPEED;
 		if (percentage > highestInteractY) {

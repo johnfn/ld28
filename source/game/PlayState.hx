@@ -83,8 +83,6 @@ class PlayState extends FlxState {
 
         FlxG.camera.follow(Reg.player, FlxCamera.STYLE_PLATFORMER);
 
-        Reg.mode = Reg.DIALOG_MODE;
-
         add(new HUD());
 
         add(new DialogBox(["You are the slowest programmer in the world.", "It's true."]));

@@ -30,15 +30,7 @@ class HUD extends FlxObject {
 	public override function update() {
 		super.update();
 
-		var selectedInteractor:game.Interactable = null;
-
-		for (interactor in Reg.interactors.members) {
-			var i:game.Interactable = cast(interactor, Interactable);
-			if (FlxMath.distanceBetween(i, Reg.player) <= Interactable.VISIBLE_RANGE) {
-				selectedInteractor = i;
-				break;
-			}
-		}
+		var selectedInteractor:game.Interactable = Interactable.getInteractor();
 
 		if (selectedInteractor != null) {
 			zAction.text = selectedInteractor.actionString();
