@@ -21,7 +21,7 @@ class Clouds extends FlxSpriteGroup {
 		super();
 		this.clouds = [];
 
-		for (x in 0...10) {
+		for (x in 0...3) {
 			newCloud(true);
 		}
 	}
@@ -46,7 +46,7 @@ class Clouds extends FlxSpriteGroup {
 		var yPosition = Math.random() * (FlxG.stage.stageHeight + 300) - 100;
 		var xPosition = 0;
 
-		var speed = Math.random() / 3;
+		var speed = Math.random() * 2;
 		if (Math.random() > .5) {
 			xPosition = -100;
 		} else {
