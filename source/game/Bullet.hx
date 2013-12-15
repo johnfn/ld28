@@ -43,7 +43,7 @@ class Bullet extends FancySprite {
 
 		this.velocity.x = BULLET_SPEED * (vx > 0 ? 1 : -1);
 
-		if (!this.onScreen(FlxG.camera)) {
+		if (!Reg.withinBoundaries(this.x, this.y)) {
 			this.removeBullet();
 		}
 

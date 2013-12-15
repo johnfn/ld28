@@ -11,6 +11,26 @@ import flixel.util.FlxSave;
 * free to simply ignore it or change it in any way you like.
 */
 class Reg {
+	static public function withinBoundaries(x:Float, y:Float):Bool {
+        if (x > (Reg.mapX + 1) * Reg.mapWidth) {
+        	return false;
+        }
+
+        if (x < Reg.mapX * Reg.mapWidth) {
+        	return false;
+        }
+
+        if (y > (Reg.mapY + 1) * Reg.mapHeight) {
+        	return false;
+        }
+
+        if (y < Reg.mapY * Reg.mapHeight) {
+        	return false;
+        }
+
+        return true;
+	}
+
 	static public var NORMAL_MODE:Int = 0;
 	static public var DIALOG_MODE:Int = 1;
 

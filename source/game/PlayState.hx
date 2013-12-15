@@ -111,7 +111,7 @@ class PlayState extends FlxState {
 
         add(new HUD());
 
-        add(new DialogBox(["You are the slowest programmer in the world.", "It's true."]));
+        // add(new DialogBox(["Clever introduction words here"]));
 
         checkUpdateScreen(true);
 	}
