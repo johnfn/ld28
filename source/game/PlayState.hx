@@ -47,11 +47,16 @@ class PlayState extends FlxState {
 
         if (change) {
             FlxG.camera.setBounds(Reg.mapX * Reg.mapWidth, Reg.mapY * Reg.mapHeight, Reg.mapWidth, Reg.mapHeight, true);
+            Reg.player.safeLocation = null;
         }
     }
 
 
 	override public function create():Void {
+#if debug
+		FlxG.autoPause = false;
+#end
+
 		// Set a background color
 		FlxG.cameras.bgColor = 0xff364964;
 		// Show the mouse (in case it hasn't been disabled)
@@ -92,7 +97,7 @@ class PlayState extends FlxState {
 		var explosion:FlxEmitter = new FlxEmitter(0, 0);
 		explosion.width = FlxG.width;
 		explosion.height = FlxG.height;
-		explosion.makeParticles("images/boomparticle.png", 100, 0, true);
+		explosion.makeParticles("images/driftparticle.png", 100, 0, true);
 		explosion.startAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds(.4, .5);
 		explosion.endAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds<Float>(0.0, 0.1);
 		explosion.start(false, 2, 0.1, 0, 8);

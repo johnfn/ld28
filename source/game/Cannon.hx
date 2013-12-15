@@ -12,6 +12,7 @@ import flixel.util.FlxMath;
 
 import flixel.addons.ui.FlxInputText;
 import flixel.util.FlxPoint;
+import game.Bullet;
 
 class Cannon extends FancySprite {
 	private var maxCooldown:Int = 120;
@@ -28,6 +29,7 @@ class Cannon extends FancySprite {
 		this.immovable = true;
 
 		this.animation.play("idle");
+		Reg.cannons.add(this);
 	}
 
 	public override function update() {
@@ -39,6 +41,9 @@ class Cannon extends FancySprite {
 		if (this.animation.curAnim != null && this.animation.curAnim.name == "fire" && this.animation.curAnim.curFrame == 4) {
 			this.animation.play("idle");
 			this.explode();
+
+			var cb:game.Bullet = new Bullet(Std.int(this.x), Std.int(this.y), -1);
+			FlxG.state.add(cb);
 		} 
 
 		cooldown--;

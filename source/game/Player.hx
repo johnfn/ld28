@@ -134,9 +134,15 @@ class Player extends FlxSprite {
 		loader.load(new URLRequest("../../../../../../../assets/images/tileset.png"));
 	}
 
-	private var safeLocation:{point:FlxPoint, map:{x:Int, y:Int}};
+	public var safeLocation:FlxPoint = null;
 	private function createRespawnPoint() {
-		safeLocation = {point: new FlxPoint(this.x, this.y), map: {x:Reg.mapX, y:Reg.mapY}};
+		if (safeLocation == null) {
+			safeLocation = new FlxPoint(this.x, this.y);
+		}
+	}
+
+	public function hitByBullet() {
+		this.respawn();
 	}
 
 	private function explode() {
@@ -148,10 +154,8 @@ class Player extends FlxSprite {
 	}
 
 	private function respawn() {
-		explode();
-
-		this.x = safeLocation.point.x;
-		this.y = safeLocation.point.y;
+		this.x = safeLocation.x;
+		this.y = safeLocation.y;
 
 		// TODO smooth scroll camera back
 
@@ -201,6 +205,8 @@ class Player extends FlxSprite {
 				this.lastPositions = [];
 			}
 		}
+
+		FlxG.collide(this, Reg.cannons); // you can walk on cannons.
 
 		if (FlxG.overlap(this, Reg.spikes)) {
 			respawn();
