@@ -36,13 +36,34 @@ class GirlBot extends Bot {
 		this.drag.y = 0;
 	}
 
+	private function respawn() {
+		this.x = Reg.player.safeLocation.x;
+		this.y = Reg.player.safeLocation.y;
+
+		// TODO smooth scroll camera back
+
+		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
+
+		this.triggerConversation(["1000 HER OWwwwww :(", "1000 YOU Sorry."]);
+	}
+
 	public override function update() {
 		super.update();
+
+		FlxG.collide(this, Reg.movingplatforms);
+
+		if (FlxG.overlap(this, Reg.spikes)) {
+			respawn();
+		}
 
 		if (isFollowingPlayer) {
 			var sign:Int = Reg.player.x - this.x > 0 ? 1 : -1;
 
-			this.velocity.x = sign * 170;
+			if (Math.abs(Reg.player.x - this.x) > 30) {
+				this.velocity.x = sign * 170;
+			} else {
+				this.x = Reg.player.x;
+			}
 
 			// attempt to jump if they did.
 			if (this.y - Reg.player.y > 50 && this.isTouching(flixel.FlxObject.FLOOR)) {
@@ -77,7 +98,7 @@ class GirlBot extends Bot {
 		Reg.girlmusic.volume = 1;
 
 		dialog.addDoneCB(function() {
-			this.triggerConversation(["1000 HER Hello!", "1000 YOU test"]);
+			this.triggerConversation(["1000 HER Hello!", "1000 YOU Um... Hi."]);
 		});
 	}
 }

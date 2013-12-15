@@ -5,15 +5,26 @@
  </tileset>
  <layer name="nocollide" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztzrENgCAQhlHmgA3U4P5rOJFXUFAYCwuI4b3kq/4rLiUAAFhXjsrsJxaytfboeNhrdLYbxru63ravAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8xQ1qBRHQ
+   eJztzrENgDAMRcHMARsEBPuvkYlwkSIFokAIInInvcoufkoAADCuKZq/HjGQXFui9eS+RXv94X2l6er2dHf29bAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPivA4LlLBA=
   </data>
  </layer>
  <layer name="Map" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt1bEJwzAQQFEPlSXcGjRASm/rDOE9TLrjIosYhFHIe/ArnaRChaYJAACAf/RKRVtjLc/Rx5KaQ3tq7lBNj3N/rTMllN+mVdwX5Td899RHZ9ZQuVDcl+2N+2hbK30zU5sDAAAAYAwPdwDA7fxbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4zsAUQJTxA==
+   eJzt2cEJg0AQQFGLShNeAxaQo92aIuwj5DYMukyIKya8B//krLuwBw8OAwAA0NOt0yx865mKlsazPMcx7qkxtKbGjlX1PMOZ7ZlC+W5axXVRvsN3j0JVlXf9Qnvm0PRBcV22Nvajbd6oMrM1BwAAAMA1nPGP6l/2AICj+G4BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABc3wvcvE71
   </data>
  </layer>
- <objectgroup name="Spike" width="100" height="100"/>
+ <objectgroup name="Spike" width="100" height="100">
+  <object gid="80" x="850" y="300"/>
+  <object gid="80" x="875" y="300"/>
+  <object gid="80" x="900" y="300"/>
+  <object gid="80" x="925" y="300"/>
+  <object gid="80" x="950" y="300"/>
+  <object gid="80" x="975" y="300"/>
+  <object gid="80" x="1000" y="300"/>
+  <object gid="80" x="1025" y="300"/>
+  <object gid="80" x="1050" y="300"/>
+  <object gid="80" x="1075" y="300"/>
+ </objectgroup>
  <objectgroup name="GirlBot" width="100" height="100">
   <object gid="218" x="350" y="250"/>
  </objectgroup>
@@ -22,5 +33,8 @@
  </objectgroup>
  <objectgroup name="BoyBot" width="100" height="100">
   <object gid="220" x="2175" y="250"/>
+ </objectgroup>
+ <objectgroup name="MovingPlatform" width="100" height="100">
+  <object gid="198" x="900" y="200"/>
  </objectgroup>
 </map>

@@ -24,6 +24,7 @@ class Reg {
 	static public var interactors:FlxGroup = new FlxGroup();
 
 	static public var spikes:FlxGroup = new FlxGroup();
+	static public var movingplatforms:FlxGroup = new FlxGroup();
 	static public var girls:FlxGroup = new FlxGroup();
 	static public var boys:FlxGroup = new FlxGroup();
 	static public var bullets:FlxGroup = new FlxGroup();

@@ -208,8 +208,9 @@ class Player extends FlxSprite {
 
 		FlxG.collide(this, Reg.cannons); // you can walk on cannons.
 
+		FlxG.collide(this, Reg.movingplatforms);
+
 		if (FlxG.overlap(this, Reg.spikes)) {
-			trace("respawn!");
 			respawn();
 		}
 
@@ -224,10 +225,6 @@ class Player extends FlxSprite {
 			if (this.velocity.y < 0) {
 				this.velocity.y = 0;
 			}
-		}
-
-		if (FlxG.keys.justPressed.R) {
-			//reloadGraphic();
 		}
 
 #if debug
