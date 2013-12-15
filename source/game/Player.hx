@@ -193,6 +193,12 @@ class Player extends FlxSprite {
 
 		updateFollowTrail();
 
+		if (FlxMath.distanceBetween(this, GirlBot.onlyGirl) > 400) {
+			Reg.boymusic.volume = 0;
+		} else {
+			Reg.boymusic.volume = Math.min( (400 - FlxMath.distanceBetween(this, GirlBot.onlyGirl)) / 400 , 1);
+		}
+
 		if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
 			this.velocity.x = -200;
 			this.facing = FlxObject.LEFT;
@@ -217,7 +223,7 @@ class Player extends FlxSprite {
 		FlxG.collide(this, Reg.movingplatforms);
 
 		Reg.map.collideWithLevel(this, touchingMap);
-		
+
 		if (FlxG.overlap(this, Reg.spikes)) {
 			respawn();
 		}

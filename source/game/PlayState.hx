@@ -123,13 +123,16 @@ class PlayState extends FlxState {
         // add(new DialogBox(["Clever introduction words here"]));
 
         Reg.mapX = 3;
+        Reg.mapY = 0;
 
         p.x += Reg.mapX * Reg.mapWidth;
         p.y += Reg.mapY * Reg.mapHeight;
 
         checkUpdateScreen(true);
 
-        trace(Reg.mapX, Reg.mapY);
+		game.MusicManager.firstTheme();
+
+		Reg.girlmusic.volume = 1;
 	}
 
 	private function addRandomThings() {

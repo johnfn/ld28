@@ -14,6 +14,8 @@ import flixel.addons.ui.FlxInputText;
 import flixel.util.FlxPoint;
 
 class GirlBot extends Bot {
+	public static var onlyGirl:GirlBot;
+
 	var currentRandomChoice:String = "be shy";
 	public function new(x:Int, y:Int) {
 		super(x, y);
@@ -35,6 +37,7 @@ class GirlBot extends Bot {
 
 		this.scaleBouncer = false;
 		this.drag.y = 0;
+		GirlBot.onlyGirl = this;
 	}
 
 	private function respawn() {
@@ -77,9 +80,6 @@ class GirlBot extends Bot {
 			if (this.y - Reg.player.y > 50 && this.isTouching(flixel.FlxObject.FLOOR)) {
 				this.velocity.y = -350;
 			}
-
-			var b:BoyBot = cast(Reg.boys.getFirstAlive(), BoyBot);
-			Reg.boymusic.volume = Math.min( Math.pow((2000 - FlxMath.distanceBetween(this, b)), 2) / (2000.0 * 2000), 1);
 		}
 	}
 
@@ -105,10 +105,6 @@ class GirlBot extends Bot {
 		isFollowingPlayer = true;
 		this.showBouncer = false;
 		Reg.player.girlFound = true;
-
-		game.MusicManager.firstTheme();
-
-		Reg.girlmusic.volume = 1;
 
 		dialog.addDoneCB(function() {
 			this.triggerConversation(["1000 HER Hello!", "1000 YOU Um... Hi."]);
