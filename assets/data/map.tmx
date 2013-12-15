@@ -3,27 +3,24 @@
  <tileset firstgid="1" name="tileset" tilewidth="25" tileheight="25">
   <image source="../images/tileset.png" width="500" height="500"/>
  </tileset>
- <layer name="Map" width="100" height="100">
-  <data encoding="base64" compression="zlib">
-   eJzt1UEKgzAQQFEP1Uu4FXIAl97WHiL3KF05DCFWqEXqe/BXmZBAFhkGAAAA7uiZitbOGueYUmOopsYv1LK3ficllN+mV9wX5Td8N+/EZgmVA8V9WT391v9rafTJTGsOAAAAgGt4OAMAfs6/BQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcH0vJLMrTQ==
-  </data>
- </layer>
  <layer name="nocollide" width="100" height="100">
   <data encoding="base64" compression="zlib">
    eJztzrENgCAQhlHmgA3U4P5rOJFXUFAYCwuI4b3kq/4rLiUAAFhXjsrsJxaytfboeNhrdLYbxru63ravAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8xQ1qBRHQ
   </data>
  </layer>
- <objectgroup name="Spike" width="100" height="100">
-  <object gid="80" x="700" y="275"/>
-  <object gid="80" x="725" y="275"/>
-  <object gid="80" x="750" y="275"/>
-  <object gid="80" x="775" y="275"/>
-  <object gid="80" x="800" y="275"/>
- </objectgroup>
+ <layer name="Map" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1bEJwzAQQFEPlSXcGjRASm/rDOE9TLrjIosYhFHIe/ArnaRChaYJAACAf/RKRVtjLc/Rx5KaQ3tq7lBNj3N/rTMllN+mVdwX5Td899RHZ9ZQuVDcl+2N+2hbK30zU5sDAAAAYAwPdwDA7fxbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4zsAUQJTxA==
+  </data>
+ </layer>
+ <objectgroup name="Spike" width="100" height="100"/>
  <objectgroup name="GirlBot" width="100" height="100">
   <object gid="218" x="350" y="250"/>
  </objectgroup>
  <objectgroup name="LeftFacingCannon" width="100" height="100">
   <object gid="219" x="575" y="250"/>
+ </objectgroup>
+ <objectgroup name="BoyBot" width="100" height="100">
+  <object gid="220" x="2175" y="250"/>
  </objectgroup>
 </map>

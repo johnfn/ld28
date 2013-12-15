@@ -227,7 +227,7 @@ class Player extends FlxSprite {
 		}
 
 		if (FlxG.keys.justPressed.R) {
-			reloadGraphic();
+			//reloadGraphic();
 		}
 
 #if debug

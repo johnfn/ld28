@@ -4,6 +4,7 @@ import flixel.effects.particles.FlxEmitter;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
@@ -24,15 +25,27 @@ class PlayState extends FlxState {
 
     public function checkUpdateScreen(forceUpdate:Bool = false) {
         var change:Bool = false;
+        var canLeave:Bool = Math.abs(Reg.player.x - cast(Reg.girls.getFirstAlive(), FlxSprite).x) < 100;
+        var triedToLeave:Bool = false;
 
         if (Reg.player.x > (Reg.mapX + 1) * Reg.mapWidth) {
-                Reg.mapX++;
-                change = true;
+    		if (!canLeave) {
+    			Reg.player.x = (Reg.mapX + 1) * Reg.mapWidth - Reg.player.width;
+    			triedToLeave = true;
+    		} else {
+	            Reg.mapX++;
+	            change = true;
+	        }
         }
 
         if (Reg.player.x < Reg.mapX * Reg.mapWidth) {
+    		if (!canLeave) {
+    			Reg.player.x = Reg.mapX * Reg.mapWidth;
+    			triedToLeave = true;
+    		} else {
                 Reg.mapX--;
                 change = true;
+            }
         }
 
         if (Reg.player.y > (Reg.mapY + 1) * Reg.mapHeight) {
@@ -44,6 +57,10 @@ class PlayState extends FlxState {
                 Reg.mapY--;
                 change = true;
         }
+
+        if (triedToLeave && !canLeave) {
+	        add(new DialogBox(["You can't leave without the girl robot!"]));
+	    }
 
         if (change || forceUpdate) {
             FlxG.camera.setBounds(Reg.mapX * Reg.mapWidth, Reg.mapY * Reg.mapHeight, Reg.mapWidth, Reg.mapHeight, true);
@@ -75,8 +92,8 @@ class PlayState extends FlxState {
 		this.add(new Clouds(0, 0));
 
         level = new TiledLevel("data/map.tmx", "images/tileset.png", 25);
-        add(level.foregroundTiles);
         add(level.backgroundTiles);
+        add(level.foregroundTiles);
         level.loadObjects(this);
 
 		var p:Player = new Player(50, 50);
@@ -139,12 +156,13 @@ class PlayState extends FlxState {
 
 			for (ent in this.members) {
 				if (Std.is(ent, game.MapAwareSprite)) {
-		        	ent.active = cast(ent, game.MapAwareSprite).onCurrentMap();
+					if (!Std.is(ent, GirlBot)) { // exempt!
+			        	ent.active = cast(ent, game.MapAwareSprite).onCurrentMap();
+			        }
 		        }
 			}
         } else if (Reg.mode == Reg.DIALOG_MODE) {
         	game.DialogBox.onlyDialog.update();
         }
-
 	}	
 }

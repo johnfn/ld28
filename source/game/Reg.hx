@@ -2,6 +2,7 @@ package game;
 
 import flixel.FlxState;
 import flixel.group.FlxGroup;
+import flixel.system.FlxSound;
 import flixel.util.FlxSave;
 
 /**
@@ -24,6 +25,7 @@ class Reg {
 
 	static public var spikes:FlxGroup = new FlxGroup();
 	static public var girls:FlxGroup = new FlxGroup();
+	static public var boys:FlxGroup = new FlxGroup();
 	static public var bullets:FlxGroup = new FlxGroup();
 	static public var cannons:FlxGroup = new FlxGroup();
 
@@ -39,4 +41,7 @@ class Reg {
 
 	static public var TILE_WIDTH:Int = 25;
 	static public var TILE_HEIGHT:Int = 25;
+
+	static public var girlmusic:FlxSound = new FlxSound();
+	static public var boymusic:FlxSound = new FlxSound();
 }
