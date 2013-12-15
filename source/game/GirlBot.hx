@@ -14,6 +14,7 @@ import flixel.addons.ui.FlxInputText;
 import flixel.util.FlxPoint;
 
 class GirlBot extends Bot {
+	var currentRandomChoice:String = "be shy";
 	public function new(x:Int, y:Int) {
 		super(x, y);
 
@@ -44,7 +45,14 @@ class GirlBot extends Bot {
 
 		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
 
-		this.triggerConversation(["1000 HER OWwwwww :(", "1000 YOU Sorry."]);
+		var thingsToSay:Array<Array<String>> = [["1000 HER OWwwwww :(", "1000 YOU Sorry."]
+			                                   ,["1000 HER That hurt :( :(", "2000 YOU Why did you do it then?.", "1000 HER I was following you."]
+			                                   ,["1000 HER :( :(", "1000 YOU :?"]
+			                                   ,["2000 HER Thank goodness I can respawn!", "2000 YOU It is indeed good to be a robot."]
+			                                   ,["2000 HER Can you stop making me die?", "2000 YOU ..."]
+			                                   ];
+
+		this.triggerConversation(thingsToSay[Std.int(Math.random() * thingsToSay.length)]);
 	}
 
 	public override function update() {
@@ -77,7 +85,11 @@ class GirlBot extends Bot {
 
 	public override function actionString():String {
 		if (isFollowingPlayer) {
-			return "Z to be shy (Note: This does nothing.)";
+			var randomThings:Array<String> = ["be shy", "be bashful", "stare awkwardly at your feet", "talk about the weather", "mumble something"];
+			if (Math.random() > .999) {
+				currentRandomChoice = randomThings[Std.int(Math.random() * randomThings.length)];
+			}
+			return "Z to " + currentRandomChoice + " (Note: This does nothing.)";
 		} else {
 			return "Z to talk";
 		}
@@ -92,6 +104,7 @@ class GirlBot extends Bot {
 
 		isFollowingPlayer = true;
 		this.showBouncer = false;
+		Reg.player.girlFound = true;
 
 		game.MusicManager.firstTheme();
 

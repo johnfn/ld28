@@ -26,6 +26,8 @@ class Player extends FlxSprite {
 
 	public var menuVisible = false;
 
+	public var girlFound:Bool = false;
+
 	private var debuggingMenu:FlxSprite;
 	private var debuggingItems:Array<DebugVariable>;
 

@@ -23,9 +23,11 @@ class PlayState extends FlxState {
 	 */
 	public var level:TiledLevel;
 
+	public var scenery:FlxEmitter;
+
     public function checkUpdateScreen(forceUpdate:Bool = false) {
         var change:Bool = false;
-        var canLeave:Bool = Math.abs(Reg.player.x - cast(Reg.girls.getFirstAlive(), FlxSprite).x) < 100;
+        var canLeave:Bool = !Reg.player.girlFound || Math.abs(Reg.player.x - cast(Reg.girls.getFirstAlive(), FlxSprite).x) < 100;
         var triedToLeave:Bool = false;
 
         if (Reg.player.x > (Reg.mapX + 1) * Reg.mapWidth) {
@@ -64,6 +66,8 @@ class PlayState extends FlxState {
 
         if (change || forceUpdate) {
             FlxG.camera.setBounds(Reg.mapX * Reg.mapWidth, Reg.mapY * Reg.mapHeight, Reg.mapWidth, Reg.mapHeight, true);
+            scenery.x = FlxG.camera.x;
+            scenery.y = FlxG.camera.y;
             Reg.player.safeLocation = null;
         }
     }
@@ -113,16 +117,16 @@ class PlayState extends FlxState {
 	}
 
 	private function addRandomThings() {
-		var explosion:FlxEmitter = new FlxEmitter(0, 0);
-		explosion.width = FlxG.width;
-		explosion.height = FlxG.height;
-		explosion.makeParticles("images/driftparticle.png", 100, 0, true);
-		explosion.startAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds(.4, .5);
-		explosion.endAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds<Float>(0.0, 0.1);
-		explosion.start(false, 2, 0.1, 0, 8);
-		explosion.setXSpeed(-50, 50);
-		explosion.setYSpeed(-50, 50);
-		FlxG.state.add(explosion);
+		scenery = new FlxEmitter(0, 0);
+		scenery.width = FlxG.width;
+		scenery.height = FlxG.height;
+		scenery.makeParticles("images/driftparticle.png", 100, 0, true);
+		scenery.startAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds(.4, .5);
+		scenery.endAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds<Float>(0.0, 0.1);
+		scenery.start(false, 2, 0.1, 0, 8);
+		scenery.setXSpeed(-50, 50);
+		scenery.setYSpeed(-50, 50);
+		FlxG.state.add(scenery);
 	}
 
 	/**
@@ -156,7 +160,7 @@ class PlayState extends FlxState {
 
 			for (ent in this.members) {
 				if (Std.is(ent, game.MapAwareSprite)) {
-					if (!Std.is(ent, GirlBot)) { // exempt!
+					if (!Std.is(ent, GirlBot) || (Std.is(ent, game.GirlBot) && !Reg.player.girlFound)) { // exempt!
 			        	ent.active = cast(ent, game.MapAwareSprite).onCurrentMap();
 			        }
 		        }

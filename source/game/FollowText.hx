@@ -32,5 +32,10 @@ class FollowText extends FlxText {
 
 		this.x = target.x - this.width / 2;
 		this.y = target.y - target.height - 10;
+
+		if (this.x < FlxG.camera.x) this.x = FlxG.camera.x;
+		if (this.x > FlxG.camera.x + FlxG.camera.width - this.width) this.x = FlxG.camera.x + FlxG.camera.width - this.width;
+
+		trace(this.x);
 	}
 }
