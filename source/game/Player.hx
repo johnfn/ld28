@@ -209,14 +209,21 @@ class Player extends FlxSprite {
 		FlxG.collide(this, Reg.cannons); // you can walk on cannons.
 
 		if (FlxG.overlap(this, Reg.spikes)) {
+			trace("respawn!");
 			respawn();
 		}
 
 		Reg.map.collideWithLevel(this, touchingMap);
 
 		this.velocity.y += 10;
-		if ((FlxG.keys.pressed.W  || FlxG.keys.pressed.UP || FlxG.keys.pressed.X) && this.isTouching(FlxObject.FLOOR)) {
-			this.velocity.y = -350;
+		if ((FlxG.keys.pressed.W  || FlxG.keys.pressed.UP || FlxG.keys.pressed.X)) {
+			if (this.isTouching(FlxObject.FLOOR)) {
+				this.velocity.y = -350;
+			}
+		} else {
+			if (this.velocity.y < 0) {
+				this.velocity.y = 0;
+			}
 		}
 
 		if (FlxG.keys.justPressed.R) {

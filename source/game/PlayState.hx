@@ -22,7 +22,7 @@ class PlayState extends FlxState {
 	 */
 	public var level:TiledLevel;
 
-    public function checkUpdateScreen() {
+    public function checkUpdateScreen(forceUpdate:Bool = false) {
         var change:Bool = false;
 
         if (Reg.player.x > (Reg.mapX + 1) * Reg.mapWidth) {
@@ -45,7 +45,7 @@ class PlayState extends FlxState {
                 change = true;
         }
 
-        if (change) {
+        if (change || forceUpdate) {
             FlxG.camera.setBounds(Reg.mapX * Reg.mapWidth, Reg.mapY * Reg.mapHeight, Reg.mapWidth, Reg.mapHeight, true);
             Reg.player.safeLocation = null;
         }
@@ -91,6 +91,8 @@ class PlayState extends FlxState {
         add(new HUD());
 
         add(new DialogBox(["You are the slowest programmer in the world.", "It's true."]));
+
+        checkUpdateScreen(true);
 	}
 
 	private function addRandomThings() {
@@ -135,9 +137,11 @@ class PlayState extends FlxState {
 			}
 #end
 
-	        Reg.inactives.setAll("active", true);
-	        Reg.inactives.update();
-	        Reg.inactives.setAll("active", false);
+			for (ent in this.members) {
+				if (Std.is(ent, game.MapAwareSprite)) {
+		        	ent.active = cast(ent, game.MapAwareSprite).onCurrentMap();
+		        }
+			}
         } else if (Reg.mode == Reg.DIALOG_MODE) {
         	game.DialogBox.onlyDialog.update();
         }

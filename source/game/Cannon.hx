@@ -34,10 +34,6 @@ class Cannon extends FancySprite {
 
 	public override function update() {
 		super.update();
-		if (this.animation.curAnim != null) {
-			trace(this.animation.curAnim.finished);
-		}
-
 		if (this.animation.curAnim != null && this.animation.curAnim.name == "fire" && this.animation.curAnim.curFrame == 4) {
 			this.animation.play("idle");
 			this.explode();

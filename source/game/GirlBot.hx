@@ -35,6 +35,7 @@ class GirlBot extends game.Interactable {
 		this.animation.play("idle");
 
 		this.scaleBouncer = false;
+		this.drag.y = 0;
 	}
 
 	public function triggerConversation(conversation:Array<String>) {
@@ -67,18 +68,26 @@ class GirlBot extends game.Interactable {
 	public override function update() {
 		super.update();
 
-		this.velocity.y += 60;
+		trace(this.velocity.y);
+
+		if (!isFollowingPlayer) {
+			this.velocity.y += 50;
+		}
+		this.velocity.y += 10;
 		Reg.map.collideWithLevel(this);
 
-		if (this.isTouching(flixel.FlxObject.FLOOR) && game.Interactable.getInteractor() == this) {
+		if (this.isTouching(flixel.FlxObject.FLOOR) && game.Interactable.getInteractor() == this && !isFollowingPlayer) {
 			this.velocity.y = -500;
 		}
 
 		if (isFollowingPlayer) {
-			// wats the law of demeter
-			if (Reg.player.lastPositions.length > 0) {	
-				this.x = Reg.player.lastPositions[0].x;
-				this.y = Reg.player.lastPositions[0].y;
+			var sign:Int = Reg.player.x - this.x > 0 ? 1 : -1;
+
+			this.velocity.x = sign * 100;
+
+			// attempt to jump if they did.
+			if (this.y - Reg.player.y > 100 && this.isTouching(flixel.FlxObject.FLOOR)) {
+				this.velocity.y = -350;
 			}
 		}
 	}
