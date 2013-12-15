@@ -12,6 +12,10 @@ import flixel.util.FlxMath;
  */
 class MenuState extends FlxState
 {
+	// poor man's scrolling background
+	private var scroll1:FlxSprite;
+	private var scroll2:FlxSprite;
+
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
@@ -24,6 +28,38 @@ class MenuState extends FlxState
 		FlxG.mouse.show();
 		#end
 		
+		Reg.background = new FlxSprite(0, 0);
+		Reg.background.scrollFactor.x = 0;
+		Reg.background.scrollFactor.y = 0;
+
+		Reg.background.loadGraphic("images/titlescreenunderlay.png");
+		Reg.background.scale.x = 1;
+		Reg.background.scale.y = 1;
+		add(Reg.background);
+
+		scroll1 = new FlxSprite(0, 0);
+		scroll1.loadGraphic("images/titlescreenoverlay.png");
+		scroll1.x = 0;
+		scroll1.y = 0;
+
+		scroll2 = new FlxSprite(0, 0);
+		scroll2.loadGraphic("images/titlescreenoverlay.png");
+		scroll2.x = scroll1.width;
+		scroll2.y = 0;
+
+		add(scroll1);
+		add(scroll2);
+
+		var titleText:FlxText = new FlxText(100, 50, 500, "One True Love", 48);
+		titleText.setBorderStyle(FlxText.BORDER_SHADOW, 0, 3);
+		add(titleText);
+
+		var pressXText:FlxText = new FlxText(200, 400, 500, "Press X to continue.", 16);
+		pressXText.setBorderStyle(FlxText.BORDER_SHADOW, 0, 3);
+		add(pressXText);
+
+		flixel.util.FlxSpriteUtil.flicker(pressXText, 99999, .5);
+
 		super.create();
 	}
 	
@@ -42,5 +78,20 @@ class MenuState extends FlxState
 	override public function update():Void
 	{
 		super.update();
+
+		scroll1.x -= .3;
+		scroll2.x -= .3;
+
+		if (scroll1.x + scroll1.width < 0) {
+			scroll1.x = scroll2.x + scroll2.width;
+		}
+
+		if (scroll2.x + scroll2.width < 0) {
+			scroll2.x = scroll1.x + scroll1.width;
+		}
+
+		if (FlxG.keys.justPressed.X) {
+			FlxG.switchState(new game.PlayState());
+		}
 	}	
 }

@@ -140,6 +140,8 @@ class Player extends FlxSprite {
 	private function createRespawnPoint() {
 		if (safeLocation == null) {
 			safeLocation = new FlxPoint(this.x, this.y);
+
+			trace("point at ", safeLocation);
 		}
 	}
 
@@ -158,6 +160,8 @@ class Player extends FlxSprite {
 	private function respawn() {
 		this.x = safeLocation.x;
 		this.y = safeLocation.y;
+
+		trace("respawn to " + this.x + " " + this.y);
 
 		// TODO smooth scroll camera back
 

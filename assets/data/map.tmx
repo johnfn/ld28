@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="25" tileheight="25">
+<map version="1.0" orientation="orthogonal" width="150" height="150" tilewidth="25" tileheight="25">
  <tileset firstgid="1" name="tileset" tilewidth="25" tileheight="25">
   <image source="../images/tileset.png" width="500" height="500"/>
  </tileset>
- <layer name="nocollide" width="100" height="100">
+ <layer name="nocollide" width="150" height="150">
   <data encoding="base64" compression="zlib">
-   eJzt0sENgkAQBVC70GgHarR/i/BgRXKARBPRXWQzyryX/BOw+zPDagX/69oHAGCqbZdddIlE9n0OXY4vnp+6nPt35jLseN1l0+DcJbk95N2zbzLsePgHXt1V0m/s3Ll6tgzQzmUktDU2909hHlPn33pHkXdHarmP0llF3Nny3m9E7CNTakX3zZAa0V0zpEZ01ywpFd0zS0pF98yQGtFdM6RGdNelp9bU70rPzZgliJ6hPbwXPVt7GBc9b3tozw5+m3kDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8uwPOlT77
+   eJzt01FKw1AQBdDuQqk7UKl7rq5BxSWo+OGKOkICQUyb2j7HZM6B+xES8t6b3KxWQLaPLgAAzM82ch95yN4Ii/IYeYo8Z2+kgXXkKnsTC/c5ktfIW+S9u56T6y43kdsf7m8id90z59J39SJy2eC9/9n3Mx/Tl7l1a2j4v+y7d0r6rvZdPna2h957rn22yPDMc+4JQDUvI4EpxvpzKDD02x617lrm2pyuZa+mfvOMNVuuS06vKqWq7LlXSEXZM6+QirJnXiXVZM+7SqrJnneFVJQ98wqpKHvmS09Vrc6f/T11iS/ZXdCnGrI7ok/Ll90bfWIqXeIv6A0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQ2g7UPE1S
   </data>
  </layer>
- <layer name="Map" width="100" height="100">
+ <layer name="Map" width="150" height="150">
   <data encoding="base64" compression="zlib">
-   eJzt2UGOwiAYBlAPNRdw6XYSD+Cyt9VDeI/ZjAkhpUH5aal9L/lWUKB8deXpBBDj9h/GoI+x6GMs+hjLEfr46TQ32jkL3++RJXVfGMvnfYMtf3svv1kuSZ5ZLh1Tq+cZ1kzJNUnezVLS525J8g6f2XgptWrW2kNKpiTXNzLNZOt3HD3pXdX0UZo7N2cqjM/tvZSId4teO03pe2w9b2+19x91bzXr9rjHqLOtpaWXNRL1vY/eQ60edxyxR0svn55zdC0dRK69xjezJ1u8y1Hveo90MBY9AAAAxNjqf+qj7QsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANDiD0wQ/aQ=
+   eJzt291NwzAUgNEOxQI88orUAfrYdRinU8AOsAdEaiVjxa3T2L1Jc450hUTSv+SrQYTudjyrj/NAS7paj8N51kBX66EretAVPeiKHnS1Hi+d9m3tNZul23pXW/dWOVNFdvWVTerzyrZ8v6VLX0tJxFo49HKonKltRXb1nk36/vj+m59kat9X90ytns8hYmqbuuf3usiu9snkjV2b9Hbp6/4ZmZbHa+p5WPPMFdnVMZn9hDmOTPR5WPrUHK90+1xL6ar0esb2ORa2l45haVqdo16dl95XPZ5vy6YGQ1OnRvcVZepxm3v+a+63Rw89GmrVUe4ZurqY09cjptX6c29Pj/RMXd3So5UWjzGnr+h1qWRLXV3T8/xEr5MRXZ12ukpFnIuerUS1patla71ePoquli3q59hcuqIHXdHDsL7qipYuf//QFS3pih50RWvpNQBdMdfYtSVdbdOhwe1vXavciqjP1CzxcdMm8u/nX/N9a697P1rkZ6b4r/Z/Jra+JtGWlgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoOwXAmJV8Q==
   </data>
  </layer>
- <objectgroup name="Spike" width="100" height="100">
+ <objectgroup name="Spike" width="150" height="150">
   <object gid="80" x="850" y="300"/>
   <object gid="80" x="875" y="300"/>
   <object gid="80" x="900" y="300"/>
@@ -24,13 +24,38 @@
   <object gid="80" x="1025" y="300"/>
   <object gid="80" x="1050" y="300"/>
   <object gid="80" x="1075" y="300"/>
+  <object gid="80" x="2800" y="700"/>
+  <object gid="80" x="2775" y="725"/>
+  <object gid="80" x="2700" y="725"/>
+  <object gid="80" x="2625" y="750"/>
+  <object gid="80" x="2525" y="750"/>
+  <object gid="80" x="2450" y="725"/>
+  <object gid="80" x="2400" y="700"/>
+  <object gid="80" x="2425" y="725"/>
+  <object gid="80" x="2500" y="750"/>
+  <object gid="80" x="2475" y="750"/>
+  <object gid="80" x="2550" y="725"/>
+  <object gid="80" x="2600" y="725"/>
+  <object gid="80" x="2575" y="750"/>
+  <object gid="80" x="2650" y="725"/>
+  <object gid="80" x="2675" y="725"/>
+  <object gid="80" x="2725" y="725"/>
+  <object gid="80" x="2750" y="750"/>
+  <object gid="80" x="2825" y="700"/>
+  <object gid="80" x="2950" y="575"/>
+  <object gid="80" x="2925" y="650"/>
+  <object gid="80" x="2900" y="675"/>
+  <object gid="80" x="2875" y="675"/>
+  <object gid="80" x="2850" y="700"/>
  </objectgroup>
- <objectgroup name="GirlBot" width="100" height="100"/>
- <objectgroup name="LeftFacingCannon" width="100" height="100">
+ <objectgroup name="GirlBot" width="150" height="150"/>
+ <objectgroup name="LeftFacingCannon" width="150" height="150">
   <object gid="219" x="575" y="250"/>
-  <object gid="219" x="2175" y="250"/>
+  <object gid="219" x="2050" y="250"/>
  </objectgroup>
- <objectgroup name="MovingPlatform" width="100" height="100">
+ <objectgroup name="MovingPlatform" width="150" height="150">
   <object gid="198" x="900" y="200"/>
+  <object gid="198" x="2775" y="350"/>
+  <object gid="198" x="2500" y="500"/>
  </objectgroup>
 </map>

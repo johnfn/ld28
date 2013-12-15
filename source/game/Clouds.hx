@@ -33,6 +33,7 @@ class Clouds extends FlxSpriteGroup {
 			cloud.sprite.x += cloud.speed;
 
 			if (!cloud.sprite.onScreen(FlxG.camera)) {
+				FlxG.state.remove(cloud.sprite);
 				clouds.remove(cloud);
 			}
 		}
@@ -46,7 +47,7 @@ class Clouds extends FlxSpriteGroup {
 		var yPosition = Math.random() * (FlxG.stage.stageHeight + 300) - 100;
 		var xPosition = 0;
 
-		var speed = Math.random() * 2;
+		var speed = Math.random() + 1;
 		if (Math.random() > .5) {
 			xPosition = -100;
 		} else {
@@ -60,7 +61,7 @@ class Clouds extends FlxSpriteGroup {
 
 		var cloud:FlxSprite = new FlxSprite(xPosition, yPosition);
 		cloud.loadGraphic("images/clouds.png", true, false, 300, 200);
-		cloud.animation.randomFrame(); // choose random cloud
+		cloud.animation.frameIndex = 0;
 		this.add(cloud);
 
 		cloud.alpha = 0.5;

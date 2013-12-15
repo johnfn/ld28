@@ -77,6 +77,15 @@ class PlayState extends FlxState {
 #if debug
 		FlxG.autoPause = false;
 #end
+		
+		Reg.background = new FlxSprite(0, 0);
+		Reg.background.scrollFactor.x = 0;
+		Reg.background.scrollFactor.y = 0;
+
+		Reg.background.loadGraphic("images/bg.png");
+		Reg.background.scale.x = 2;
+		Reg.background.scale.y = 2;
+		add(Reg.background);
 
 		// Set a background color
 		FlxG.cameras.bgColor = 0xff364964;
@@ -113,7 +122,14 @@ class PlayState extends FlxState {
 
         // add(new DialogBox(["Clever introduction words here"]));
 
+        Reg.mapX = 3;
+
+        p.x += Reg.mapX * Reg.mapWidth;
+        p.y += Reg.mapY * Reg.mapHeight;
+
         checkUpdateScreen(true);
+
+        trace(Reg.mapX, Reg.mapY);
 	}
 
 	private function addRandomThings() {
@@ -125,7 +141,7 @@ class PlayState extends FlxState {
 		scenery.endAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds<Float>(0.0, 0.1);
 		scenery.start(false, 2, 0.1, 0, 8);
 		scenery.setXSpeed(-50, 50);
-		scenery.setYSpeed(-50, 50);
+		scenery.setYSpeed(12, 50);
 		FlxG.state.add(scenery);
 	}
 

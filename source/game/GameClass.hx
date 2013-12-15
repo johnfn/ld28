@@ -16,6 +16,10 @@ class GameClass extends FlxGame
 
 		var fps:Int = Reg.FPS;
 
+#if debug
 		super(Math.ceil(stageWidth / ratio), Math.ceil(stageHeight / ratio), PlayState, ratio, fps, fps);
+#else
+		super(Math.ceil(stageWidth / ratio), Math.ceil(stageHeight / ratio), MenuState, ratio, fps, fps);
+#end
 	}
 }

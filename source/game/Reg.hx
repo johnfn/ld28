@@ -1,5 +1,6 @@
 package game;
 
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.system.FlxSound;
@@ -30,6 +31,8 @@ class Reg {
 
         return true;
 	}
+
+	static public var background:FlxSprite;
 
 	static public var NORMAL_MODE:Int = 0;
 	static public var DIALOG_MODE:Int = 1;
