@@ -216,11 +216,11 @@ class Player extends FlxSprite {
 
 		FlxG.collide(this, Reg.movingplatforms);
 
+		Reg.map.collideWithLevel(this, touchingMap);
+		
 		if (FlxG.overlap(this, Reg.spikes)) {
 			respawn();
 		}
-
-		Reg.map.collideWithLevel(this, touchingMap);
 
 		this.velocity.y += 10;
 		if ((FlxG.keys.pressed.W  || FlxG.keys.pressed.UP || FlxG.keys.pressed.X)) {
