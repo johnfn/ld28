@@ -20,6 +20,10 @@ class Clouds extends FlxSpriteGroup {
 	public function new(x:Int, y:Int) {
 		super();
 		this.clouds = [];
+
+		for (x in 0...10) {
+			newCloud(true);
+		}
 	}
 
 	public override function update() {
@@ -33,14 +37,15 @@ class Clouds extends FlxSpriteGroup {
 			}
 		}
 
-		if (Math.random() * 1000 > 999) {
+		if (Math.random() * 1000 > 990) {
 			newCloud();
 		}
 	}
 
-	private function newCloud() {
+	private function newCloud(anywhere:Bool = false) {
 		var yPosition = Math.random() * (FlxG.stage.stageHeight + 300) - 100;
 		var xPosition = 0;
+
 		var speed = Math.random() / 3;
 		if (Math.random() > .5) {
 			xPosition = -100;
@@ -49,10 +54,18 @@ class Clouds extends FlxSpriteGroup {
 			speed *= -1;
 		}
 
+		if (anywhere) {
+			xPosition = Std.int(Math.random() * FlxG.width);
+		}
+
 		var cloud:FlxSprite = new FlxSprite(xPosition, yPosition);
 		cloud.loadGraphic("images/clouds.png", true, false, 300, 200);
 		cloud.animation.randomFrame(); // choose random cloud
 		this.add(cloud);
+
+		cloud.alpha = 0.5;
+		cloud.scale.x = Math.random() + 1;
+		cloud.scale.y = Math.random() + 1;
 
 		this.clouds.push({sprite: cloud, speed: speed});
 	}

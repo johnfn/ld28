@@ -150,11 +150,15 @@ class Player extends FlxSprite {
 		this.x = safeLocation.point.x;
 		this.y = safeLocation.point.y;
 
-		// TODO load map
-
 		// TODO smooth scroll camera back
 
 		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
+
+		/*
+		FlxG.camera.followAdjust(.5, .5);
+		flixel.util.FlxSpriteUtil.flicker(this, 1.0, 0.04, true, true, function(a:flixel.effects.FlxFlicker):Void {
+
+		}); */
 	}
 
 	private function touchingMap(o1:FlxObject, o2:FlxObject): Void {
@@ -166,11 +170,11 @@ class Player extends FlxSprite {
 	public override function update() {
 		super.update();
 
-		if (FlxG.keys.pressed.A) {
+		if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
 			this.velocity.x = -200;
 			this.facing = FlxObject.LEFT;
 		} 
-		if (FlxG.keys.pressed.D) {
+		if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) {
 			this.velocity.x = 200;
 			this.facing = FlxObject.RIGHT;
 		}
@@ -183,7 +187,7 @@ class Player extends FlxSprite {
 
 
 		this.velocity.y += 10;
-		if (FlxG.keys.pressed.W && this.isTouching(FlxObject.FLOOR)) {
+		if ((FlxG.keys.pressed.W  || FlxG.keys.pressed.UP || FlxG.keys.pressed.X) && this.isTouching(FlxObject.FLOOR)) {
 			this.velocity.y = -350;
 		}
 

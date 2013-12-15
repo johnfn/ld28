@@ -10,13 +10,20 @@ import flixel.util.FlxSave;
 * free to simply ignore it or change it in any way you like.
 */
 class Reg {
+	static public var NORMAL_MODE:Int = 0;
+	static public var DIALOG_MODE:Int = 1;
+
+	static public var mode:Int = NORMAL_MODE;
+
 	static public var FPS:Int = 60;
 
 	static public var map:TiledLevel;
 
 	static public var inactives:FlxGroup = new FlxGroup();
+	static public var interactors:FlxGroup = new FlxGroup();
 
 	static public var spikes:FlxGroup = new FlxGroup();
+	static public var girls:FlxGroup = new FlxGroup();
 
 	/** Current game state. */
 	static public var state:FlxState; 

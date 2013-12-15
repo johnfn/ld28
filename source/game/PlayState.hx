@@ -1,5 +1,6 @@
 package game;
 
+import flixel.effects.particles.FlxEmitter;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -65,6 +66,7 @@ class PlayState extends FlxState {
 
 		Reg.state = this;
 
+        this.addRandomThings();
 		this.add(new Clouds(0, 0));
 
         level = new TiledLevel("data/map.tmx", "images/tileset.png", 25);
@@ -80,6 +82,25 @@ class PlayState extends FlxState {
         Reg.player = p;
 
         FlxG.camera.follow(Reg.player, FlxCamera.STYLE_PLATFORMER);
+
+        Reg.mode = Reg.DIALOG_MODE;
+
+        add(new HUD());
+
+        add(new DialogBox(["You are the slowest programmer in the world.", "It's true."]));
+	}
+
+	private function addRandomThings() {
+		var explosion:FlxEmitter = new FlxEmitter(0, 0);
+		explosion.width = FlxG.width;
+		explosion.height = FlxG.height;
+		explosion.makeParticles("images/boomparticle.png", 100, 0, true);
+		explosion.startAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds(.4, .5);
+		explosion.endAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds<Float>(0.0, 0.1);
+		explosion.start(false, 2, 0.1, 0, 8);
+		explosion.setXSpeed(-50, 50);
+		explosion.setYSpeed(-50, 50);
+		FlxG.state.add(explosion);
 	}
 
 	/**
@@ -94,27 +115,29 @@ class PlayState extends FlxState {
 	 * Function that is called once every frame.
 	 */
 	override public function update():Void {
-		super.update();
+		if (Reg.mode == Reg.NORMAL_MODE) {
+			super.update();
 
-		checkUpdateScreen();
+			checkUpdateScreen();
 
 #if debug
-		if (FlxG.keys.justPressed.R) {
-			this.remove(level.foregroundTiles);
-			this.remove(level.backgroundTiles);
+			if (FlxG.keys.justPressed.R) {
+				this.remove(level.foregroundTiles);
+				this.remove(level.backgroundTiles);
 
-	        level = new TiledLevel("data/map.tmx", "images/tileset.png", 25);
-	        add(level.foregroundTiles);
-	        add(level.backgroundTiles);
-	        level.loadObjects(this);
-		}
+		        level = new TiledLevel("data/map.tmx", "images/tileset.png", 25);
+		        add(level.foregroundTiles);
+		        add(level.backgroundTiles);
+		        level.loadObjects(this);
+			}
 #end
 
-        super.update();
-
-        Reg.inactives.setAll("active", true);
-        Reg.inactives.update();
-        Reg.inactives.setAll("active", false);
+	        Reg.inactives.setAll("active", true);
+	        Reg.inactives.update();
+	        Reg.inactives.setAll("active", false);
+        } else if (Reg.mode == Reg.DIALOG_MODE) {
+        	game.DialogBox.onlyDialog.update();
+        }
 
 	}	
 }
