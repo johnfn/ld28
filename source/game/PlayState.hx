@@ -29,9 +29,11 @@ class PlayState extends FlxState {
 
 	public var bogusRunthrough:Bool = false;
 
+    public var seenRecently:Int = 0;
+
     public function checkUpdateScreen(forceUpdate:Bool = false) {
         var change:Bool = false;
-        var canLeave:Bool = !Reg.player.girlFound || Math.abs(Reg.player.x - cast(Reg.girls.getFirstAlive(), FlxSprite).x) < 100;
+        var canLeave:Bool = !Reg.player.girlFound || Math.abs(Reg.player.x - cast(Reg.girls.getFirstAlive(), FlxSprite).x) < 30;
         var triedToLeave:Bool = false;
 
         if (Reg.player.x > (Reg.mapX + 1) * Reg.mapWidth) {
@@ -70,7 +72,8 @@ class PlayState extends FlxState {
             downwardsCatchGirl = true;
         }
 
-        if (triedToLeave && !canLeave) {
+        if (triedToLeave && !canLeave && seenRecently <= 0) {
+            seenRecently = 50;
 	        add(new DialogBox(["You can't leave without the girl robot!"]));
 	    }
 
@@ -295,6 +298,8 @@ class PlayState extends FlxState {
 		        }
 			}
 
+            seenRecently--;
+            
 			super.update();
 
 			checkUpdateScreen();

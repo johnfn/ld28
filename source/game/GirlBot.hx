@@ -92,8 +92,6 @@ class GirlBot extends Bot {
 
 		// TODO smooth scroll camera back
 
-		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
-
 		var thingsToSay:Array<Array<String>> = [["1000 HER OWwwwww :(", "1000 YOU Sorry."]
 			                                   ,["1000 HER That hurt :( :(", "2000 YOU Why did you do it then?"]
 			                                   ,["1000 HER :( :(", "1000 YOU :?"]
@@ -101,7 +99,11 @@ class GirlBot extends Bot {
 			                                   ,["2000 HER Can you stop making me die?", "2000 YOU ..."]
 			                                   ];
 
-		this.triggerConversation(thingsToSay[Std.int(Math.random() * thingsToSay.length)]);
+		if (!flixel.util.FlxSpriteUtil.isFlickering(this)) {
+			this.triggerConversation(thingsToSay[Std.int(Math.random() * thingsToSay.length)]);
+		}
+
+		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
 
 		Reg.shediesSound.play(true);
 	}
