@@ -205,7 +205,7 @@ class PlayState extends FlxState {
 
 #if debug
         Reg.mapX = 5;
-        Reg.mapY = 0;
+        Reg.mapY = 1;
 #end
 
 		/*

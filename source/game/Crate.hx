@@ -16,6 +16,8 @@ import flixel.util.FlxPoint;
 class Crate extends FancySprite {
 	public var down:Bool = false;
 
+	public var presses:Int = 0;
+
 	public function new(x:Int, y:Int) {
 		super(x, y);
 
@@ -30,12 +32,20 @@ class Crate extends FancySprite {
 
 	public function switchTo(s:Bool) {
 		if (s == true) {
-			this.animation.play("on");
+			presses--;
+
+			if (presses == 0) {
+				this.animation.play("on");
+			}
 		} else {
-			this.animation.play("off");
+			presses++;
+
+			if (presses > 0) {
+				this.animation.play("off");
+			}
 		}
 
-		this.solid = s;
+		this.solid = presses == 0;
 	}
 
 	public override function update() {

@@ -51,6 +51,12 @@ class GirlBot extends Bot {
 							  , "4000 HER Oh, definitely Infinite Jest by David Foster Wallace."
 							  , "3000 YOU Oh... I haven't read that one."
 			                  ]
+			                  , 
+							  [ "4000 YOU The sparkles in the air are very nice today."
+							  , "4000 YOU Oh yes. They are very..."
+							  , "3000 YOU ..."
+							  , "3000 YOU Yellow."
+			                  ]
 							 ];
 
 		this.loadGraphic("images/cutenpc.png", true, false, 25, 25);
@@ -70,6 +76,7 @@ class GirlBot extends Bot {
 			                                   ,["4000 HER Oooh!"]
 			                                   ,["4000 HER *applauds*"]
 			                                   ,["4000 HER Cooool."]
+			                                   ,["4000 HER Hehe!"]
 			                                   ];
 
 		this.triggerConversation(thingsToSay[Std.int(Math.random() * thingsToSay.length)]);
@@ -164,6 +171,8 @@ class GirlBot extends Bot {
 			respawn();
 			Reg.player.respawn();	
 		}
+
+		FlxG.collide(this, Reg.crates);
 
 	}
 
