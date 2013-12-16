@@ -18,25 +18,23 @@ class MusicManager extends FlxObject {
 	public function new() {super(); }
 
 	public static function firstTheme():Void {
-        Reg.boymusic = new FlxSound();
-#if flash
-        Reg.boymusic.loadEmbedded("music/boythemefinal.mp3", true);
-#else
-        Reg.boymusic.loadEmbedded("music/boythemefinal.ogg", true);
-#end 
-        Reg.boymusic.volume = 0;
+                Reg.boymusic = new FlxSound();
+        #if flash
+                Reg.boymusic.loadEmbedded("music/boythemefinal.mp3", true);
+        #else
+                Reg.boymusic.loadEmbedded("music/boythemefinal.ogg", true);
+        #end 
+                Reg.boymusic.volume = 0;
 
-        Reg.girlmusic = new FlxSound();
-#if flash
-        Reg.girlmusic.loadEmbedded("music/girlthemefinal.mp3", true);
-#else
-        Reg.girlmusic.loadEmbedded("music/girlthemefinal.ogg", true);
-#end 
-        Reg.girlmusic.volume = 0;
+                Reg.girlmusic = new FlxSound();
+        #if flash
+                Reg.girlmusic.loadEmbedded("music/girlthemefinal.mp3", true);
+        #else
+                Reg.girlmusic.loadEmbedded("music/girlthemefinal.ogg", true);
+        #end 
+                Reg.girlmusic.volume = 0;
 
-#if !debug
-        Reg.girlmusic.play();
-        Reg.boymusic.play();
-#end
+                Reg.girlmusic.play();
+                Reg.boymusic.play();
 	}
 }

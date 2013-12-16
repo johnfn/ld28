@@ -41,7 +41,7 @@ class Bot extends game.Interactable {
 		var text:game.FollowText = new game.FollowText(target, content);
 
 		if (who == "HER") {
-			text.color = 0xcc7777;
+			text.color = 0xeeaaaa;
 		}
 
 		FlxG.state.add(text);

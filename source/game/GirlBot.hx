@@ -92,12 +92,18 @@ class GirlBot extends Bot {
 
 		FlxG.collide(this, Reg.movingplatforms);
 
-		if (FlxG.overlap(this, Reg.spikes)) {
-			respawn();
-		}
-
 		if (FlxG.keys.justPressed.C) {
 			followToggledOff = !followToggledOff;
+
+			if (followToggledOff && Math.random() > .7) {
+				var things:Array<Array<String>> = [["2000 HER Come back soon!"], ["2000 HER See you in a bit!"], ["2000 HER I'll just wait here for now."], ["2000 HER Bye!"]];
+				this.triggerConversation(things[Std.int(Math.random() * things.length)]);
+			}
+
+			if (!followToggledOff && Math.random() > .7) {
+				var things:Array<Array<String>> = [["2000 HER Coming!"], ["2000 HER Yay!"]];
+				this.triggerConversation(things[Std.int(Math.random() * things.length)]);
+			}
 		}
 
 		if (followToggledOff) {
@@ -126,6 +132,11 @@ class GirlBot extends Bot {
 				this.triggerRandomConversation();
 			}
 		}
+
+		if (FlxG.overlap(this, Reg.spikes)) {
+			respawn();
+		}
+
 	}
 
 	public override function actionString():String {

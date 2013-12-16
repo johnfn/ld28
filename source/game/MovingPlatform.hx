@@ -31,6 +31,7 @@ class MovingPlatform extends FancySprite {
 
 		this.immovable = false; //im sure there's a better way to do this lolz
 		Reg.map.collideWithLevel(this);
+		FlxG.collide(Reg.movingplatforms);
 		this.immovable = true;
 
 		if (this.isTouching(flixel.FlxObject.LEFT) || this.isTouching(flixel.FlxObject.RIGHT)) {

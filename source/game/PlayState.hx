@@ -76,11 +76,12 @@ class PlayState extends FlxState {
 
     var kv:Map<String, Array<String>>;
     private function initializeDialog() {
-    	kv = [ "1,0" => ["Unfortunately, you are not strong enough to destroy spikes simply by jumping on them.", "You're still working on that one."]
+    	kv = [ "0,0" => ["Although you are strong enough to destroy cannons simply by jumping on top of them, you have never obtained what you truly desire from life:", "TRUE LOVE.", "But somewhere out there is the girl for you!", "Well, the girl robot.", "You know, because you're a robot and all."]
+	    	 , "1,0" => ["Unfortunately, you are not strong enough to destroy spikes simply by jumping on them.", "You're still working on that one."]
     	     , "2,0" => ["It would be pretty cool though.", "Destroying spikes.", "...", "Also finding true love.", "You've certainly got your priorities straight."]
     	     , "3,0" => ["But finding true love would require a LEAP of faith...", "...", "a LEAP...", "...", "Hint: You may have to take a leap here."]
     	     , "0,1" => ["You notice that if the girl gets hurt, somehow you do too.", "Is this what true love feels like?"]
-    	     , "1,1" => ["Sometimes you may have to leave the girl behind.", "Toggle whether she follows you with C."]
+    	     , "2,1" => ["Sometimes you may have to those you love behind behind.", "Toggle whether she follows you with C."]
     	     ];
     }
 
@@ -144,16 +145,23 @@ class PlayState extends FlxState {
 
         add(new HUD());
 
-        add(new DialogBox(["Although you are strong enough to destroy cannons simply by jumping on top of them, you have never obtained what you truly desire from life:", "TRUE LOVE.", "But somewhere out there is the girl for you!", "Well, the girl robot.", "You know, because you're a robot and all."]));
 
-        Reg.mapX = 0;
-        Reg.mapY = 0;
+#if debug
+        Reg.mapX = 1;
+        Reg.mapY = 1;
+#end
 
-        p.y = 450;
-        p.x = 150;
+        //p.y = 450;
+        //p.x = 150;
 
         p.x += Reg.mapX * Reg.mapWidth;
         p.y += Reg.mapY * Reg.mapHeight;
+
+#if debug
+		game.GirlBot.onlyGirl.isFollowingPlayer = true;
+        game.GirlBot.onlyGirl.x = p.x;
+        game.GirlBot.onlyGirl.y = p.y;
+#end
 
         checkUpdateScreen(true);
 
