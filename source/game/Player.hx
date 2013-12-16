@@ -82,8 +82,6 @@ class Player extends FlxSprite {
 
 			this.debuggingItems.push(dbg);
 
-			trace(dbg.height);
-
 			currentHeight += dbg.height + 10;
 		}	
 
@@ -142,8 +140,6 @@ class Player extends FlxSprite {
 	private function createRespawnPoint() {
 		if (safeLocation == null) {
 			safeLocation = new FlxPoint(this.x, this.y);
-
-			trace("point at ", safeLocation);
 		}
 	}
 
@@ -162,10 +158,6 @@ class Player extends FlxSprite {
 	private function respawn() {
 		this.x = safeLocation.x;
 		this.y = safeLocation.y;
-
-		trace("respawn to " + this.x + " " + this.y);
-
-		// TODO smooth scroll camera back
 
 		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
 
@@ -235,10 +227,8 @@ class Player extends FlxSprite {
 
 		Reg.map.collideWithLevel(this, touchingMap);
 
-		trace(this.isTouching(FlxObject.FLOOR), this.onGround);
 		if (this.isTouching(FlxObject.FLOOR)) {
 			if (!this.onGround) {
-				trace("derrrrrrrp");
 				this.onGround = true;
 				Reg.landSound.play(true);
 			}

@@ -146,8 +146,8 @@ class PlayState extends FlxState {
         Reg.mapX = 0;
         Reg.mapY = 0;
 
-        //p.y = 450;
-        //p.x = 150;
+        p.y = 450;
+        p.x = 150;
 
         p.x += Reg.mapX * Reg.mapWidth;
         p.y += Reg.mapY * Reg.mapHeight;

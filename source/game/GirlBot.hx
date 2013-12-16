@@ -26,6 +26,29 @@ class GirlBot extends Bot {
 			                  , 
 							  [ "1000 HER Be careful!"
 			                  ]
+			                  , 
+							  [ "4000 HER I've never seen someone jump on a cannon before."
+			                  ]
+			                  , 
+							  [ "1000 HER I'm hungry."
+							  , "2000 YOU How can you be hungry? You're a robot."
+							  , "1000 HER *cough*"
+			                  ]
+			                  , 
+							  [ "1000 YOU So... nice weather we're having eh?"
+							  , "3000 HER Yes, a beautiful day in Robot World."
+			                  ]
+			                  , 
+							  [ "1000 YOU You have very nice..."
+							  , "1000 YOU Um..."
+							  , "1000 YOU Robot eyes."
+							  , "3000 HER *blush*"
+			                  ]
+			                  , 
+							  [ "1000 YOU What's your favorite novel?"
+							  , "4000 HER Oh, definitely Infinite Jest by David Foster Wallace."
+							  , "3000 YOU Oh... I haven't read that one."
+			                  ]
 							 ];
 
 		this.loadGraphic("images/cutenpc.png", true, false, 25, 25);
@@ -40,6 +63,10 @@ class GirlBot extends Bot {
 		GirlBot.onlyGirl = this;
 	}
 
+	public function triggerRandomConversation() {
+		this.triggerConversation(this.conversations[Std.int(Math.random() * this.conversations.length)]);
+	}
+
 	private function respawn() {
 		this.x = Reg.player.safeLocation.x;
 		this.y = Reg.player.safeLocation.y;
@@ -49,7 +76,7 @@ class GirlBot extends Bot {
 		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
 
 		var thingsToSay:Array<Array<String>> = [["1000 HER OWwwwww :(", "1000 YOU Sorry."]
-			                                   ,["1000 HER That hurt :( :(", "2000 YOU Why did you do it then?.", "1000 HER I was following you."]
+			                                   ,["1000 HER That hurt :( :(", "2000 YOU Why did you do it then?"]
 			                                   ,["1000 HER :( :(", "1000 YOU :?"]
 			                                   ,["2000 HER Thank goodness I can respawn!", "2000 YOU It is indeed good to be a robot."]
 			                                   ,["2000 HER Can you stop making me die?", "2000 YOU ..."]
@@ -82,6 +109,10 @@ class GirlBot extends Bot {
 			}
 
 			Reg.map.collideWithLevel(this);
+
+			if (Math.random() > .9996) {
+				this.triggerRandomConversation();
+			}
 		}
 	}
 
