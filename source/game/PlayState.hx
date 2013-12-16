@@ -25,6 +25,8 @@ class PlayState extends FlxState {
 
 	public var scenery:FlxEmitter;
 
+    public var clouds:Clouds;
+
 	public var bogusRunthrough:Bool = false;
 
     public function checkUpdateScreen(forceUpdate:Bool = false) {
@@ -79,6 +81,7 @@ class PlayState extends FlxState {
 
         if (change || forceUpdate) {
         	triggerDialog();
+            this.clouds.restart();
 
             FlxG.camera.setBounds(Reg.mapX * Reg.mapWidth, Reg.mapY * Reg.mapHeight, Reg.mapWidth, Reg.mapHeight, true);
             scenery.x = FlxG.camera.bounds.x;
@@ -185,7 +188,8 @@ class PlayState extends FlxState {
 		Reg.state = this;
 
         this.addRandomThings();
-		this.add(new Clouds(0, 0));
+        this.clouds = new Clouds(0, 0);
+        this.add(clouds);
 
         level = new TiledLevel("data/map.tmx", "images/tileset.png", 25);
         add(level.backgroundTiles);

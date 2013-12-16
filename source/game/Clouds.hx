@@ -21,7 +21,16 @@ class Clouds extends FlxSpriteGroup {
 		super();
 		this.clouds = [];
 
-		for (x in 0...3) {
+		restart();
+	}
+
+	public function restart() {
+		for (cloud in clouds) {
+			this.remove(cloud.sprite);
+			clouds.remove(cloud);
+		}
+
+		for (x in 0...6) {
 			newCloud(true);
 		}
 	}
@@ -32,14 +41,13 @@ class Clouds extends FlxSpriteGroup {
 		for (cloud in clouds) {
 			cloud.sprite.x += cloud.speed;
 
-			if (!cloud.sprite.onScreen(FlxG.camera)) {
-				FlxG.state.remove(cloud.sprite);
-				clouds.remove(cloud);
+			if (cloud.sprite.x + cloud.sprite.width < FlxG.camera.bounds.x && cloud.speed < 0) {
+				cloud.sprite.x = FlxG.camera.bounds.x + FlxG.camera.bounds.width + 50;
 			}
-		}
 
-		if (Math.random() * 1000 > 990) {
-			newCloud();
+			if (cloud.sprite.x > FlxG.camera.bounds.x + FlxG.camera.bounds.width && cloud.speed > 0) {
+				cloud.sprite.x = FlxG.camera.bounds.x - 50;
+			}
 		}
 	}
 
@@ -64,7 +72,7 @@ class Clouds extends FlxSpriteGroup {
 		cloud.animation.frameIndex = 0;
 		this.add(cloud);
 
-		cloud.alpha = 0.5;
+		cloud.alpha = Math.random() / 2 + .1;
 		cloud.scale.x = Math.random() + 1;
 		cloud.scale.y = Math.random() + 1;
 

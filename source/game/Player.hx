@@ -186,10 +186,10 @@ class Player extends FlxSprite {
 
 		updateFollowTrail();
 
-		if (FlxMath.distanceBetween(this, GirlBot.onlyGirl) > 300) {
+		if (FlxMath.distanceBetween(this, GirlBot.onlyGirl) > 200) {
 			Reg.boymusic.volume = 0;
 		} else {
-			Reg.boymusic.volume = Math.min( (300 - FlxMath.distanceBetween(this, GirlBot.onlyGirl)) / 300 , 1);
+			Reg.boymusic.volume = Math.min( (200 - FlxMath.distanceBetween(this, GirlBot.onlyGirl)) / 200 , 1);
 		}
 
 		if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
