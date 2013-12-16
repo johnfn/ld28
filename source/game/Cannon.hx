@@ -32,6 +32,20 @@ class Cannon extends FancySprite {
 		Reg.cannons.add(this);
 	}
 
+	public override function destroy() {
+		var explosion:FlxEmitter = new FlxEmitter(this.x, this.y, 70);
+		explosion.makeParticles("images/boomparticle.png", 16, 0, 2);
+		explosion.endAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds<Float>(0.0, 0.1);
+		explosion.start(true, .8);
+		FlxG.state.add(explosion);
+
+		Reg.state.remove(this);
+		Reg.cannons.remove(this);
+
+		Reg.blowupSound.play(true);
+		super.destroy();
+	}
+
 	public override function update() {
 		super.update();
 		if (this.animation.curAnim != null && this.animation.curAnim.name == "fire" && this.animation.curAnim.curFrame == 4) {
@@ -40,6 +54,7 @@ class Cannon extends FancySprite {
 
 			var cb:game.Bullet = new Bullet(Std.int(this.x), Std.int(this.y), -1);
 			FlxG.state.add(cb);
+			Reg.shootSound.play(true);
 		} 
 
 		cooldown--;

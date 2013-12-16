@@ -27,6 +27,11 @@ class DialogBox extends FlxObject {
 
 		box = new FlxSprite(125, 300);
 		textbox = new FlxText(150, 325, 350, "", 14);
+		box.scrollFactor.x = 0;
+		box.scrollFactor.y = 0;
+		textbox.scrollFactor.x = 0;
+		textbox.scrollFactor.y = 0;
+
 		textbox.setBorderStyle(FlxText.BORDER_SHADOW, 0, 3);
 		box.loadGraphic("images/dialogbox.png");
 

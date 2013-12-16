@@ -20,13 +20,13 @@ class GirlBot extends Bot {
 	public function new(x:Int, y:Int) {
 		super(x, y);
 
-		this.conversations = [ [ "1000 HER Someday my true love will come!"
-		                  , "1000 YOU Yawn."
-		                  ] 
-		                  , 
-						  [ "1000 HER Be careful!"
-		                  ]
-						 ];
+		this.conversations = [ [ "1000 HER You are so good at jumping on cannons!"
+			                  , "1000 YOU Um... thanks."
+			                  ] 
+			                  , 
+							  [ "1000 HER Be careful!"
+			                  ]
+							 ];
 
 		this.loadGraphic("images/cutenpc.png", true, false, 25, 25);
 		this.animation.add("idle", [0, 1, 2, 3, 4, 5, 6, 7], 8);
@@ -80,6 +80,8 @@ class GirlBot extends Bot {
 			if (this.y - Reg.player.y > 50 && this.isTouching(flixel.FlxObject.FLOOR)) {
 				this.velocity.y = -350;
 			}
+
+			Reg.map.collideWithLevel(this);
 		}
 	}
 
@@ -99,7 +101,7 @@ class GirlBot extends Bot {
 		if (isFollowingPlayer) {
 			return;
 		}
-		var dialog = new game.DialogBox(["GIRL: Hello!"]);
+		var dialog = new game.DialogBox(["This is a girl robot.", "You can tell because she has a bow.", "All girls have bows.", "GIRL: Hello!", "YOU: Umm... hi.", "You are not quite sure what to say, as you have never seen a girl robot before.", "And YOU ONLY GET ONE chance at true love, so you better not mess this up!", "YOU: Would you like to see me jump on a cannon?", "HER: ...Um, ok."]);
 		FlxG.state.add(dialog);
 
 		isFollowingPlayer = true;
@@ -107,7 +109,7 @@ class GirlBot extends Bot {
 		Reg.player.girlFound = true;
 
 		dialog.addDoneCB(function() {
-			this.triggerConversation(["1000 HER Hello!", "1000 YOU Um... Hi."]);
+			this.triggerConversation(["1000 HER Yay!"]);
 		});
 	}
 }

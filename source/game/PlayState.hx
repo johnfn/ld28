@@ -65,6 +65,8 @@ class PlayState extends FlxState {
 	    }
 
         if (change || forceUpdate) {
+        	triggerDialog();
+
             FlxG.camera.setBounds(Reg.mapX * Reg.mapWidth, Reg.mapY * Reg.mapHeight, Reg.mapWidth, Reg.mapHeight, true);
             scenery.x = FlxG.camera.bounds.x;
             scenery.y = FlxG.camera.bounds.y;
@@ -72,11 +74,30 @@ class PlayState extends FlxState {
         }
     }
 
+    var kv:Map<String, Array<String>>;
+    private function initializeDialog() {
+    	kv = [ "1,0" => ["Unfortunately, you are not strong enough to destroy spikes simply by jumping on them.", "You're still working on that one."]
+    	     , "2,0" => ["It would be pretty cool though.", "Destroying spikes.", "...", "Also finding true love.", "You've certainly got your priorities straight."]
+    	     , "3,0" => ["But finding true love would require a LEAP of faith...", "...", "a LEAP...", "...", "Hint: You may have to take a leap here."]
+    	     ];
+    }
+
+    private function triggerDialog() {
+    	var key:String = "" + Reg.mapX + "," + Reg.mapY;
+    	if (kv.exists(key)) {
+    		var dialog = kv.get(key);
+    		add (new game.DialogBox(dialog));
+    		kv.remove(key);
+    	}
+    }
+
 
 	override public function create():Void {
 #if debug
 		FlxG.autoPause = false;
 #end
+		
+		initializeDialog();
 		
 		Reg.background = new FlxSprite(0, 0);
 		Reg.background.scrollFactor.x = 0;
@@ -120,10 +141,13 @@ class PlayState extends FlxState {
 
         add(new HUD());
 
-        // add(new DialogBox(["Clever introduction words here"]));
+        add(new DialogBox(["Although you are strong enough to destroy cannons simply by jumping on top of them, you have never obtained what you truly desire from life:", "TRUE LOVE.", "But somewhere out there is the girl for you!", "Well, the girl robot.", "You know, because you're a robot and all."]));
 
-        Reg.mapX = 3;
+        Reg.mapX = 0;
         Reg.mapY = 0;
+
+        //p.y = 450;
+        //p.x = 150;
 
         p.x += Reg.mapX * Reg.mapWidth;
         p.y += Reg.mapY * Reg.mapHeight;
@@ -133,6 +157,13 @@ class PlayState extends FlxState {
 		game.MusicManager.firstTheme();
 
 		Reg.girlmusic.volume = 1;
+
+		Reg.jumpSound.loadEmbedded("sounds/jump." + #if flash "mp3" #else "ogg" #end);
+		Reg.landSound.loadEmbedded("sounds/land." + #if flash "mp3" #else "ogg" #end);
+		Reg.landSound.volume = .4;
+
+		Reg.shootSound.loadEmbedded("sounds/shoot." + #if flash "mp3" #else "ogg" #end);
+		Reg.blowupSound.loadEmbedded("sounds/blowup." + #if flash "mp3" #else "ogg" #end);
 	}
 
 	private function addRandomThings() {

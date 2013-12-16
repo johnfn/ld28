@@ -36,6 +36,8 @@ class Interactable extends FancySprite {
 		interact.loadGraphic("images/bang.png");
 		FlxG.state.add(interact);
 
+		interact.visible = false;
+
 		Reg.interactors.add(this);
 	}
 

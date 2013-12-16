@@ -22,7 +22,9 @@ import flash.display.Loader;
 class Player extends FlxSprite {
 	/** test */
 	public var tweakable:Array<String>;
-	public var derpus:Int = 44;
+
+	public var cannonRebound:Bool = false;
+	public var onGround:Bool = false;
 
 	public var menuVisible = false;
 
@@ -218,11 +220,31 @@ class Player extends FlxSprite {
 			}
 		}
 
-		FlxG.collide(this, Reg.cannons); // you can walk on cannons.
+		var that:Player = this;
+
+		FlxG.collide(this, Reg.cannons, function(o1:Player, o2:Cannon) {
+			o2.destroy();
+			// that.cannonRebound = true; //?
+		}); 
+
+		if (this.cannonRebound && this.isTouching(FlxObject.FLOOR)) {
+			this.cannonRebound = false;
+		}
 
 		FlxG.collide(this, Reg.movingplatforms);
 
 		Reg.map.collideWithLevel(this, touchingMap);
+
+		trace(this.isTouching(FlxObject.FLOOR), this.onGround);
+		if (this.isTouching(FlxObject.FLOOR)) {
+			if (!this.onGround) {
+				trace("derrrrrrrp");
+				this.onGround = true;
+				Reg.landSound.play(true);
+			}
+		} else {
+			this.onGround = false;
+		}
 
 		if (FlxG.overlap(this, Reg.spikes)) {
 			respawn();
@@ -231,10 +253,11 @@ class Player extends FlxSprite {
 		this.velocity.y += 10;
 		if ((FlxG.keys.pressed.W  || FlxG.keys.pressed.UP || FlxG.keys.pressed.X)) {
 			if (this.isTouching(FlxObject.FLOOR)) {
+				Reg.jumpSound.play(true);
 				this.velocity.y = -350;
 			}
 		} else {
-			if (this.velocity.y < 0) {
+			if (this.velocity.y < 0 && !cannonRebound) {
 				this.velocity.y = 0;
 			}
 		}

@@ -10,7 +10,7 @@
  </layer>
  <layer name="Map" width="150" height="150">
   <data encoding="base64" compression="zlib">
-   eJzt3MFt2zAYBlAP1QV67LVA0LOPXifjZIp2hALNHqmQGCAEyqYk/qIovQd8yMEKaUufGEdycrlwVK9fgZr0qh/Xr/RAr/qhV0TQKyLoFRH0qh/fgrat7fsoe3f2Xp3dj8LM1bJXf0ZJ/X7w2Hi7vUtfy5QWa+HQl2th5narZa9+jpKeH//+5z1J6Xm1JKUin0OLlHZqyfu6lr16STLu2KOk35e+7vdMau6vuceh56zVsle3JC8zcsuk9XHYe0r2V/r4Wnvp1dTryW1zm3h8ah9OpdYxiur51HkV8XxrdmowdOqt0litzN1va49/ybgRfYjoUK0ejR2hV3dr+rVFaq0/S/u0pSP16pmIrtSYY02/Wq9LU87Uq0cij0+r9XE8/5beLnqVanGO11wvn42/Fb3at9rr5Vb22KtfmZxVq/dHa+kVEfSKCMP62kOvdKue+zWKyPH16lzSa1+Rc/TUq9b9+ptJT8bXVCPn6bFXLfq1h+ewRu5afdQ8999fe+3VFsf4vi5NzdnDmjV1DyhqjqP1qnbP9rhuLvHo/mLNcVvfk3ymVq9yGT5HnnuflEvpmCVjzZm3ZoZ5S+5fp66Zr+NtS+97b63l30zxae5nJnpYk2hjyc8+XQIAAAAAAAAAAAAAAAAAAAAAgHOI/H+1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwZB/OpsBu
+   eJzt3UFq20AUgOEcqhfIstuA6dpLX6fHySnaIxSaS2TVCmQYhKSMrHmaGfn74NGFg8a2fk8cK6RvL5zVz3FqeKu0LvF01Y/rOD3QVT90lUdX2+gqj6620VUeXW2jqzwtdPUt6GtLe51M6569q2f3PXO2qt3V72RSv1Zum35d69LHsqTGXjj0cs2crW3V7iqd9PXx9/98JJP7unpkckXehxqT29Qj7+tqd3UZZ9rY2lySSR/3x8yUfL62noeeZ6/aXd3GuWyY28zUPg+tT87zld6+VytdLT2euYZuC7cvPYdLU+ocRXW+9LqKuL8lmxoMTb0XOtZWpX4e3Pq87T3/OceN6CGioVIdTZ2hq7s9fR0xpfafR3s60pm6+kpEKyXW2NNX7X1pyTN1tSby/NTaH6frH+n9RVepGq/xkvvlV8c/iq7aVnq/PEqLXf2YmWdV6/3RXroigq6IMOyvPXSlrXLun1FEHl9XzyX97CtyjZ66qt3Xn5npyfQz1ch1euyqRl8t3Ic95j6rj1rn/vNrr12tneNS5/y+Ly2t2cOetXQNKGqNs3VVei9pcd98xNr1xZLHrX1N8i66q7kZfo987n3S3OQeM+dYW9YtOcO6OdevU9eZf6dfm3vd+2jD461xHaeH/eUoW39noqU9aY2ujvfI974eWkrpigi6IoKuiKArIuiKCLoiwpFdvY6jq/M7qquhp89xdHV+vg8SYfq3ifZMLl0RQVdE0BURdEUEXRFBV0TQFRF0RQRdEUFXRNAVEXRFBF0RQVcAANC+mv9HMwBQV+TfqwUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgDP7B/183Hs=
   </data>
  </layer>
  <objectgroup name="Spike" width="150" height="150">
@@ -54,6 +54,7 @@
  <objectgroup name="LeftFacingCannon" width="150" height="150">
   <object gid="219" x="575" y="250"/>
   <object gid="219" x="2050" y="250"/>
+  <object gid="219" x="650" y="975"/>
  </objectgroup>
  <objectgroup name="MovingPlatform" width="150" height="150">
   <object gid="198" x="900" y="200"/>

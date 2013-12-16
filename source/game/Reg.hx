@@ -68,4 +68,9 @@ class Reg {
 
 	static public var girlmusic:FlxSound = new FlxSound();
 	static public var boymusic:FlxSound = new FlxSound();
+
+	static public var jumpSound:FlxSound = new FlxSound();
+	static public var landSound:FlxSound = new FlxSound();
+	static public var shootSound:FlxSound = new FlxSound();
+	static public var blowupSound:FlxSound = new FlxSound();
 }
