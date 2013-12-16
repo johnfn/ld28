@@ -35,7 +35,11 @@ class HUD extends FlxObject {
 		if (selectedInteractor != null) {
 			zAction.text = selectedInteractor.actionString();
 		} else {
-			zAction.text = "Press z to do literally nothing.";
+			if (Spike.endgameExplained) {
+				zAction.text = "Press z to be awesome.";
+			} else {
+				zAction.text = "Press z to do literally nothing.";
+			}
 		}
 	}
 }

@@ -18,7 +18,6 @@ class MusicManager extends FlxObject {
 	public function new() {super(); }
 
 	public static function firstTheme():Void {
-                Reg.boymusic = new FlxSound();
         #if flash
                 Reg.boymusic.loadEmbedded("music/boythemefinal.mp3", true);
         #else
@@ -26,7 +25,6 @@ class MusicManager extends FlxObject {
         #end 
                 Reg.boymusic.volume = 0;
 
-                Reg.girlmusic = new FlxSound();
         #if flash
                 Reg.girlmusic.loadEmbedded("music/girlthemefinal.mp3", true);
         #else
@@ -37,4 +35,9 @@ class MusicManager extends FlxObject {
                 Reg.girlmusic.play();
                 Reg.boymusic.play();
 	}
+
+        public static function stop() {
+                Reg.girlmusic.stop();
+                Reg.boymusic.stop();
+        }
 }

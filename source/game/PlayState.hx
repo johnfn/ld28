@@ -90,16 +90,20 @@ class PlayState extends FlxState {
     private function triggerDialog() {
     	var key:String = "" + Reg.mapX + "," + Reg.mapY;
     	if (key == "4,2") {
+    		game.MusicManager.stop();
+
     		if (Reg.player.girlFound) {
+    			Reg.goodwin.play();
     			for (s in Reg.spikes.members) {
     				s.destroy();
     			}
     		} else {
     			Spike.endgame = true;
     			kv.remove(key);
+    			Reg.gooderwin.play();
     		}
     	}
-    	
+
     	if (kv.exists(key)) {
     		var dialog = kv.get(key);
     		add (new game.DialogBox(dialog));
@@ -173,15 +177,17 @@ class PlayState extends FlxState {
         Reg.mapY = 0;
 #end
 
+		/*
         p.y = 450;
         p.x = 150;
+        */
 
         p.x += Reg.mapX * Reg.mapWidth;
         p.y += Reg.mapY * Reg.mapHeight;
 
+		game.GirlBot.onlyGirl.isFollowingPlayer = true;
         /*
 #if debug
-		game.GirlBot.onlyGirl.isFollowingPlayer = true;
         game.GirlBot.onlyGirl.x = p.x;
         game.GirlBot.onlyGirl.y = p.y;
 #end
@@ -194,6 +200,7 @@ class PlayState extends FlxState {
 		Reg.girlmusic.volume = 1;
 
 		Reg.jumpSound.loadEmbedded("sounds/jump." + #if flash "mp3" #else "ogg" #end);
+		Reg.awesomejumpSound.loadEmbedded("sounds/AwesomeJump." + #if flash "mp3" #else "ogg" #end);
 		Reg.landSound.loadEmbedded("sounds/land." + #if flash "mp3" #else "ogg" #end);
 		Reg.landSound.volume = .4;
 
@@ -202,6 +209,18 @@ class PlayState extends FlxState {
 
 		Reg.youdieSound.loadEmbedded("sounds/youdie." + #if flash "mp3" #else "ogg" #end);
 		Reg.shediesSound.loadEmbedded("sounds/shedies." + #if flash "mp3" #else "ogg" #end);
+
+        #if flash
+                Reg.goodwin.loadEmbedded("music/goodwin.mp3", true);
+        #else
+                Reg.goodwin.loadEmbedded("music/goodwin.ogg", true);
+        #end 
+
+        #if flash
+                Reg.gooderwin.loadEmbedded("music/gooderwin.mp3", true);
+        #else
+                Reg.gooderwin.loadEmbedded("music/gooderwin.ogg", true);
+        #end 
 	}
 
 	private function addRandomThings() {

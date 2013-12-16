@@ -235,15 +235,18 @@ class Player extends FlxSprite {
 			this.onGround = false;
 		}
 
+		var done:Bool = false;
 		FlxG.overlap(this, Reg.spikes, function(p:FlxSprite, sp:Spike) {
 			if (Spike.endgame) {
-				if (Spike.endgameExplained && !Spike.endgameExplained2) {
-					Spike.endgameExplained2 = true;
-					new game.DialogBox(["Well, I guess this is pretty cool, too."]);
-				}
-				if (!Spike.endgameExplained) {
-					new game.DialogBox(["You die, cold, alone and unloved.", ":(", "...", "Hey... wait a minute."]);
-					Spike.endgameExplained = true;
+				if (!done) {
+					if (Spike.endgameExplained && !Spike.endgameExplained2) {
+						Spike.endgameExplained2 = true;
+						new game.DialogBox(["Well, I guess this is pretty cool, too."]);
+					}
+					if (!Spike.endgameExplained) {
+						new game.DialogBox(["You die, cold, alone and unloved.", ":(", "...", "Hey... wait a minute."]);
+						Spike.endgameExplained = true;
+					}
 				}
 
 				sp.blowup();
@@ -254,12 +257,18 @@ class Player extends FlxSprite {
 					game.GirlBot.onlyGirl.respawn();
 				}
 			}
+
+			done = true;
 		});
 
 		this.velocity.y += 10;
 		if ((FlxG.keys.pressed.W  || FlxG.keys.pressed.UP || FlxG.keys.pressed.X)) {
 			if (this.isTouching(FlxObject.FLOOR)) {
-				Reg.jumpSound.play(true);
+				if (Spike.endgameExplained) {
+					Reg.awesomejumpSound.play(true);
+				} else {
+					Reg.jumpSound.play(true);
+				}
 				this.velocity.y = -350;
 			}
 		} else {
