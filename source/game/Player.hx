@@ -235,13 +235,26 @@ class Player extends FlxSprite {
 			this.onGround = false;
 		}
 
-		if (FlxG.overlap(this, Reg.spikes)) {
-			respawn();
+		FlxG.overlap(this, Reg.spikes, function(p:FlxSprite, sp:Spike) {
+			if (Spike.endgame) {
+				if (Spike.endgameExplained && !Spike.endgameExplained2) {
+					Spike.endgameExplained2 = true;
+					new game.DialogBox(["Well, I guess this is pretty cool, too."]);
+				}
+				if (!Spike.endgameExplained) {
+					new game.DialogBox(["You die, cold, alone and unloved.", ":(", "...", "Hey... wait a minute."]);
+					Spike.endgameExplained = true;
+				}
 
-			if (this.girlFound && !game.GirlBot.onlyGirl.followToggledOff) {
-				game.GirlBot.onlyGirl.respawn();
+				sp.blowup();
+			} else {
+				respawn();
+
+				if (this.girlFound && !game.GirlBot.onlyGirl.followToggledOff) {
+					game.GirlBot.onlyGirl.respawn();
+				}
 			}
-		}
+		});
 
 		this.velocity.y += 10;
 		if ((FlxG.keys.pressed.W  || FlxG.keys.pressed.UP || FlxG.keys.pressed.X)) {

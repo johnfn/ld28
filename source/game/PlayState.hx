@@ -89,6 +89,17 @@ class PlayState extends FlxState {
 
     private function triggerDialog() {
     	var key:String = "" + Reg.mapX + "," + Reg.mapY;
+    	if (key == "4,2") {
+    		if (Reg.player.girlFound) {
+    			for (s in Reg.spikes.members) {
+    				s.destroy();
+    			}
+    		} else {
+    			Spike.endgame = true;
+    			kv.remove(key);
+    		}
+    	}
+    	
     	if (kv.exists(key)) {
     		var dialog = kv.get(key);
     		add (new game.DialogBox(dialog));
@@ -158,7 +169,7 @@ class PlayState extends FlxState {
         add(new HUD());
 
 #if debug
-        Reg.mapX = 0;
+        Reg.mapX = 4;
         Reg.mapY = 0;
 #end
 
