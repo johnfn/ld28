@@ -41,6 +41,8 @@ class HUD extends FlxObject {
 				if (!flixel.util.FlxSpriteUtil.isFlickering(zAction)) {
 					flixel.util.FlxSpriteUtil.flicker(zAction, 99999, .5);
 				}
+			} else {
+				flixel.util.FlxSpriteUtil.stopFlickering(zAction);
 			}
 		} else {
 			flixel.util.FlxSpriteUtil.stopFlickering(zAction);

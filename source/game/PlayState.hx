@@ -204,8 +204,8 @@ class PlayState extends FlxState {
         add(new HUD());
 
 #if debug
-        Reg.mapX = 5;
-        Reg.mapY = 1;
+        Reg.mapX = 0;
+        Reg.mapY = 0;
 #end
 
 		/*
@@ -217,10 +217,10 @@ class PlayState extends FlxState {
         p.y += Reg.mapY * Reg.mapHeight;
 
 #if debug
+        /*
         game.GirlBot.onlyGirl.x = p.x;
         game.GirlBot.onlyGirl.y = p.y;
 
-        /*
 		game.GirlBot.onlyGirl.isFollowingPlayer = true;
         Reg.player.girlFound = true;
         */

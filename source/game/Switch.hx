@@ -40,6 +40,8 @@ class Switch extends FancySprite {
 						crate.switchTo(false);
 					}
 				}
+
+				Reg.shootSound.play(true);
 			}
 
 			down = true;
