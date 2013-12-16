@@ -214,6 +214,7 @@ class Player extends FlxSprite {
 		var that:Player = this;
 
 		FlxG.collide(this, Reg.cannons, function(o1:Player, o2:Cannon) {
+			if (!that.isTouching(FlxObject.FLOOR)) return;
 			o2.destroy();
 
 			if (this.girlFound) {

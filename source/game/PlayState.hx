@@ -217,10 +217,13 @@ class PlayState extends FlxState {
         p.y += Reg.mapY * Reg.mapHeight;
 
 #if debug
-		game.GirlBot.onlyGirl.isFollowingPlayer = true;
         game.GirlBot.onlyGirl.x = p.x;
         game.GirlBot.onlyGirl.y = p.y;
+
+        /*
+		game.GirlBot.onlyGirl.isFollowingPlayer = true;
         Reg.player.girlFound = true;
+        */
 #end
 
         checkUpdateScreen(true);
