@@ -16,7 +16,7 @@ import flixel.util.FlxPoint;
 class GirlBot extends Bot {
 	public static var onlyGirl:GirlBot;
 
-	var followToggledOff:Bool = false;
+	public var followToggledOff:Bool = false;
 
 	var currentRandomChoice:String = "be shy";
 	public function new(x:Int, y:Int) {
@@ -135,6 +135,7 @@ class GirlBot extends Bot {
 
 		if (FlxG.overlap(this, Reg.spikes)) {
 			respawn();
+			Reg.player.respawn();	
 		}
 
 	}

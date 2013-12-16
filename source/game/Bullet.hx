@@ -27,6 +27,7 @@ class Bullet extends FancySprite {
 
 	public function removeBullet() {
 		Reg.bullets.remove(this);
+		Reg.state.remove(this);
 		this.destroy();
 	}
 

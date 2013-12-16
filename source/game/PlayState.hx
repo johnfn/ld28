@@ -81,22 +81,34 @@ class PlayState extends FlxState {
     	     , "2,0" => ["It would be pretty cool though.", "Destroying spikes.", "...", "Also finding true love.", "You've certainly got your priorities straight."]
     	     , "3,0" => ["But finding true love would require a LEAP of faith...", "...", "a LEAP...", "...", "Hint: You may have to take a leap here."]
     	     , "0,1" => ["You notice that if the girl gets hurt, somehow you do too.", "Is this what true love feels like?"]
+    	     , "1,1" => ["You calculate (because you're a robot) that if you stomp on 5 cannons, you will win the heart of the girl.", "Like I said, you haven't really done this before."]
     	     , "2,1" => ["Sometimes you may have to those you love behind behind.", "Toggle whether she follows you with C."]
+    	     , "4,2" => ["You win :)"]
     	     ];
     }
 
     private function triggerDialog() {
     	var key:String = "" + Reg.mapX + "," + Reg.mapY;
-    	trace(key);
     	if (kv.exists(key)) {
     		var dialog = kv.get(key);
     		add (new game.DialogBox(dialog));
     		kv.remove(key);
     	}
+
+    	if (Reg.mapY == 2) {
+			finalScreenSetup();
+    	}
     }
 
+	public function finalScreenSetup() {
+		Reg.background.loadGraphic("images/starringskyunderlay.png");
+
+		add(new game.Heart(Reg.player));
+		add(new game.Heart(game.GirlBot.onlyGirl));
+	}
 
 	override public function create():Void {
+		FlxG.log.redirectTraces = false;
 #if debug
 		FlxG.autoPause = false;
 #end
@@ -145,9 +157,8 @@ class PlayState extends FlxState {
 
         add(new HUD());
 
-
 #if debug
-        Reg.mapX = 1;
+        Reg.mapX = 4;
         Reg.mapY = 1;
 #end
 
@@ -203,6 +214,15 @@ class PlayState extends FlxState {
 	 */
 	override public function update():Void {
 		if (Reg.mode == Reg.NORMAL_MODE) {
+			for (ent in this.members) {
+				if (Std.is(ent, game.MapAwareSprite)) {
+					if (!Std.is(ent, GirlBot) || (Std.is(ent, game.GirlBot) && !Reg.player.girlFound)) { // exempt!
+						var fs:FlxSprite = cast(ent, FlxSprite);
+			        	ent.active = Reg.withinBoundaries(fs.x, fs.y);
+			        }
+		        }
+			}
+
 			super.update();
 
 			checkUpdateScreen();
@@ -219,14 +239,6 @@ class PlayState extends FlxState {
 			}
 #end
 
-			for (ent in this.members) {
-				if (Std.is(ent, game.MapAwareSprite)) {
-					if (!Std.is(ent, GirlBot) || (Std.is(ent, game.GirlBot) && !Reg.player.girlFound)) { // exempt!
-						var fs:FlxSprite = cast(ent, FlxSprite);
-			        	ent.active = Reg.withinBoundaries(fs.x, fs.y);
-			        }
-		        }
-			}
         } else if (Reg.mode == Reg.DIALOG_MODE) {
         	game.DialogBox.onlyDialog.update();
         }

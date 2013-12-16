@@ -49,6 +49,13 @@ class Player extends FlxSprite {
 		this.drag.x = 2000;
 
 		buildDebuggingMenu();
+
+		this.width = 20;
+		this.health = 20;
+
+#if debug
+		this.girlFound = true;
+#end
 	}	
 
 	public function buildDebuggingMenu() {
@@ -155,17 +162,11 @@ class Player extends FlxSprite {
 		FlxG.state.add(explosion);
 	}
 
-	private function respawn() {
+	public function respawn() {
 		this.x = safeLocation.x;
 		this.y = safeLocation.y;
 
 		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
-
-		/*
-		FlxG.camera.followAdjust(.5, .5);
-		flixel.util.FlxSpriteUtil.flicker(this, 1.0, 0.04, true, true, function(a:flixel.effects.FlxFlicker):Void {
-
-		}); */
 	}
 
 	private function touchingMap(o1:FlxObject, o2:FlxObject): Void {
@@ -238,6 +239,10 @@ class Player extends FlxSprite {
 
 		if (FlxG.overlap(this, Reg.spikes)) {
 			respawn();
+
+			if (this.girlFound && !game.GirlBot.onlyGirl.followToggledOff) {
+				game.GirlBot.onlyGirl.respawn();
+			}
 		}
 
 		this.velocity.y += 10;

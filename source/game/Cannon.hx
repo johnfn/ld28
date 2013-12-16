@@ -19,6 +19,11 @@ class Cannon extends FancySprite {
 	private var cooldown:Int = 120;
 	public var bulletDX:Int = -1;
 
+	public static var count:Int = 0;
+	public var id:Int = 0;
+
+	public var explosion:FlxEmitter = null;
+
 	public function new(x:Int, y:Int) {
 		super(x, y);
 
@@ -31,14 +36,19 @@ class Cannon extends FancySprite {
 
 		this.animation.play("idle");
 		Reg.cannons.add(this);
+
+		id = ++count;
+
+		if (explosion == null) {
+			explosion = new FlxEmitter(this.x, this.y, 70);
+			explosion.makeParticles("images/boomparticle.png", 16, 0, 2);
+			explosion.endAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds<Float>(0.0, 0.1);
+			FlxG.state.add(explosion);
+		}
 	}
 
 	public override function destroy() {
-		var explosion:FlxEmitter = new FlxEmitter(this.x, this.y, 70);
-		explosion.makeParticles("images/boomparticle.png", 16, 0, 2);
-		explosion.endAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds<Float>(0.0, 0.1);
 		explosion.start(true, .8);
-		FlxG.state.add(explosion);
 
 		Reg.state.remove(this);
 		Reg.cannons.remove(this);
@@ -49,6 +59,7 @@ class Cannon extends FancySprite {
 
 	public override function update() {
 		super.update();
+
 		if (this.animation.curAnim != null && this.animation.curAnim.name == "fire" && this.animation.curAnim.curFrame == 4) {
 			this.animation.play("idle");
 			this.explode();
@@ -69,10 +80,6 @@ class Cannon extends FancySprite {
 	}
 
 	public function explode() {
-		var explosion:FlxEmitter = new FlxEmitter(this.x, this.y, 70);
-		explosion.makeParticles("images/boomparticle.png", 8, 0, 2);
-		explosion.endAlpha = new flixel.effects.particles.FlxTypedEmitter.Bounds<Float>(0.0, 0.1);
 		explosion.start(true, .8);
-		FlxG.state.add(explosion);
 	}
 }
