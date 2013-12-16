@@ -17,6 +17,6 @@ class RightFacingCannon extends Cannon {
 		super(x, y);
 
 		this.bulletDX = 1;
-		this.facing = flixel.FlxObject.RIGHT;
+		this.facing = flixel.FlxObject.LEFT;
 	}
 }
