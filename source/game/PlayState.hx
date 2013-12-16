@@ -158,21 +158,23 @@ class PlayState extends FlxState {
         add(new HUD());
 
 #if debug
-        Reg.mapX = 4;
-        Reg.mapY = 1;
+        Reg.mapX = 0;
+        Reg.mapY = 0;
 #end
 
-        //p.y = 450;
-        //p.x = 150;
+        p.y = 450;
+        p.x = 150;
 
         p.x += Reg.mapX * Reg.mapWidth;
         p.y += Reg.mapY * Reg.mapHeight;
 
+        /*
 #if debug
 		game.GirlBot.onlyGirl.isFollowingPlayer = true;
         game.GirlBot.onlyGirl.x = p.x;
         game.GirlBot.onlyGirl.y = p.y;
 #end
+		*/
 
         checkUpdateScreen(true);
 
@@ -186,6 +188,9 @@ class PlayState extends FlxState {
 
 		Reg.shootSound.loadEmbedded("sounds/shoot." + #if flash "mp3" #else "ogg" #end);
 		Reg.blowupSound.loadEmbedded("sounds/blowup." + #if flash "mp3" #else "ogg" #end);
+
+		Reg.youdieSound.loadEmbedded("sounds/youdie." + #if flash "mp3" #else "ogg" #end);
+		Reg.shediesSound.loadEmbedded("sounds/shedies." + #if flash "mp3" #else "ogg" #end);
 	}
 
 	private function addRandomThings() {

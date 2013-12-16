@@ -85,6 +85,8 @@ class GirlBot extends Bot {
 			                                   ];
 
 		this.triggerConversation(thingsToSay[Std.int(Math.random() * thingsToSay.length)]);
+
+		Reg.shediesSound.play(true);
 	}
 
 	public override function update() {
@@ -115,15 +117,30 @@ class GirlBot extends Bot {
 		if (isFollowingPlayer && !followToggledOff) {
 			var sign:Int = Reg.player.x - this.x > 0 ? 1 : -1;
 
-			if (Math.abs(Reg.player.x - this.x) > 30) {
+			if (Math.abs(Reg.player.x - this.x) > 50) {
 				this.velocity.x = sign * 170;
 			} else {
-				this.x = Reg.player.x;
+				if (FlxMath.distanceBetween(this, Reg.player) < 50) {
+					if (Reg.player.facing == flixel.FlxObject.LEFT) {
+						this.x = Reg.player.x + Reg.player.width + 5;
+					} else {
+						this.x = Reg.player.x - Reg.player.width - 5;
+					}
+
+					if (Reg.player.isTouching(flixel.FlxObject.FLOOR)) {
+						this.y = Reg.player.y;
+					}
+				}
 			}
 
 			// attempt to jump if they did.
-			if (this.y - Reg.player.y > 50 && this.isTouching(flixel.FlxObject.FLOOR)) {
+			if (this.y - Reg.player.y > 20 && (this.isTouching(flixel.FlxObject.FLOOR) || FlxMath.distanceBetween(this, Reg.player) < 50)) {
 				this.velocity.y = -350;
+			}
+			
+			// but not too high
+			if (this.y < Reg.player.y && this.velocity.y < 0) {
+				this.velocity.y = 0;
 			}
 
 			Reg.map.collideWithLevel(this);

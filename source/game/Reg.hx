@@ -73,4 +73,8 @@ class Reg {
 	static public var landSound:FlxSound = new FlxSound();
 	static public var shootSound:FlxSound = new FlxSound();
 	static public var blowupSound:FlxSound = new FlxSound();
+
+	static public var youdieSound:FlxSound = new FlxSound();
+	static public var shediesSound:FlxSound = new FlxSound();
+
 }

@@ -52,10 +52,6 @@ class Player extends FlxSprite {
 
 		this.width = 20;
 		this.health = 20;
-
-#if debug
-		this.girlFound = true;
-#end
 	}	
 
 	public function buildDebuggingMenu() {
@@ -167,6 +163,9 @@ class Player extends FlxSprite {
 		this.y = safeLocation.y;
 
 		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
+
+		trace("YOU DIEEEE");
+		Reg.youdieSound.play(true);
 	}
 
 	private function touchingMap(o1:FlxObject, o2:FlxObject): Void {
@@ -231,7 +230,6 @@ class Player extends FlxSprite {
 		if (this.isTouching(FlxObject.FLOOR)) {
 			if (!this.onGround) {
 				this.onGround = true;
-				Reg.landSound.play(true);
 			}
 		} else {
 			this.onGround = false;

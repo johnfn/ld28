@@ -69,7 +69,6 @@ class Cannon extends FancySprite {
 				cb.x += this.width + 3;
 			}
 			FlxG.state.add(cb);
-			Reg.shootSound.play(true);
 		} 
 
 		cooldown--;
