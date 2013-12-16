@@ -79,11 +79,14 @@ class PlayState extends FlxState {
     	kv = [ "1,0" => ["Unfortunately, you are not strong enough to destroy spikes simply by jumping on them.", "You're still working on that one."]
     	     , "2,0" => ["It would be pretty cool though.", "Destroying spikes.", "...", "Also finding true love.", "You've certainly got your priorities straight."]
     	     , "3,0" => ["But finding true love would require a LEAP of faith...", "...", "a LEAP...", "...", "Hint: You may have to take a leap here."]
+    	     , "0,1" => ["You notice that if the girl gets hurt, somehow you do too.", "Is this what true love feels like?"]
+    	     , "1,1" => ["Sometimes you may have to leave the girl behind.", "Toggle whether she follows you with C."]
     	     ];
     }
 
     private function triggerDialog() {
     	var key:String = "" + Reg.mapX + "," + Reg.mapY;
+    	trace(key);
     	if (kv.exists(key)) {
     		var dialog = kv.get(key);
     		add (new game.DialogBox(dialog));

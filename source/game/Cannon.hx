@@ -17,6 +17,7 @@ import game.Bullet;
 class Cannon extends FancySprite {
 	private var maxCooldown:Int = 120;
 	private var cooldown:Int = 120;
+	public var bulletDX:Int = -1;
 
 	public function new(x:Int, y:Int) {
 		super(x, y);
@@ -52,7 +53,10 @@ class Cannon extends FancySprite {
 			this.animation.play("idle");
 			this.explode();
 
-			var cb:game.Bullet = new Bullet(Std.int(this.x), Std.int(this.y), -1);
+			var cb:game.Bullet = new Bullet(Std.int(this.x), Std.int(this.y), this.bulletDX);
+			if (this.bulletDX > 0) {
+				cb.x += this.width + 3;
+			}
 			FlxG.state.add(cb);
 			Reg.shootSound.play(true);
 		} 

@@ -16,6 +16,8 @@ import flixel.util.FlxPoint;
 class GirlBot extends Bot {
 	public static var onlyGirl:GirlBot;
 
+	var followToggledOff:Bool = false;
+
 	var currentRandomChoice:String = "be shy";
 	public function new(x:Int, y:Int) {
 		super(x, y);
@@ -67,7 +69,7 @@ class GirlBot extends Bot {
 		this.triggerConversation(this.conversations[Std.int(Math.random() * this.conversations.length)]);
 	}
 
-	private function respawn() {
+	public function respawn() {
 		this.x = Reg.player.safeLocation.x;
 		this.y = Reg.player.safeLocation.y;
 
@@ -94,7 +96,17 @@ class GirlBot extends Bot {
 			respawn();
 		}
 
-		if (isFollowingPlayer) {
+		if (FlxG.keys.justPressed.C) {
+			followToggledOff = !followToggledOff;
+		}
+
+		if (followToggledOff) {
+			this.alpha = 0.5;
+		} else {
+			this.alpha = 1.0;
+		}
+
+		if (isFollowingPlayer && !followToggledOff) {
 			var sign:Int = Reg.player.x - this.x > 0 ? 1 : -1;
 
 			if (Math.abs(Reg.player.x - this.x) > 30) {

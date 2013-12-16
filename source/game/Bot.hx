@@ -20,14 +20,7 @@ class Bot extends game.Interactable {
 	public function new(x:Int, y:Int) {
 		super(x, y);
 
-		conversations = [ [ "1000 HER Someday my true love will come!"
-		                  , "1000 YOU Yawn."
-		                  ] 
-		                  , 
-						  [ "1000 HER Be careful!"
-		                  ]
-						 ];
-
+		conversations = [];
 		this.scaleBouncer = false;
 		this.drag.y = 0;
 	}
@@ -39,13 +32,17 @@ class Bot extends game.Interactable {
 		var content = parts.join(" ");
 		var target:FlxSprite;
 
-		if (who == "HER" || who == "HIM") {
+		if (who == "HER") {
 			target = this;
 		} else {
 			target = Reg.player;
 		}
 
 		var text:game.FollowText = new game.FollowText(target, content);
+
+		if (who == "HER") {
+			text.color = 0xcc7777;
+		}
 
 		FlxG.state.add(text);
 		haxe.Timer.delay(function() {

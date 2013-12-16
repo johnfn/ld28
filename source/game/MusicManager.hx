@@ -34,7 +34,9 @@ class MusicManager extends FlxObject {
 #end 
         Reg.girlmusic.volume = 0;
 
+#if !debug
         Reg.girlmusic.play();
         Reg.boymusic.play();
+#end
 	}
 }
