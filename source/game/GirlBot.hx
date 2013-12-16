@@ -65,6 +65,16 @@ class GirlBot extends Bot {
 		GirlBot.onlyGirl = this;
 	}
 
+	public function wow() {
+		var thingsToSay:Array<Array<String>> = [["4000 HER Wow!"]
+			                                   ,["4000 HER Oooh!"]
+			                                   ,["4000 HER *applauds*"]
+			                                   ,["4000 HER Cooool."]
+			                                   ];
+
+		this.triggerConversation(thingsToSay[Std.int(Math.random() * thingsToSay.length)]);
+	}
+
 	public function triggerRandomConversation() {
 		this.triggerConversation(this.conversations[Std.int(Math.random() * this.conversations.length)]);
 	}

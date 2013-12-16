@@ -31,6 +31,7 @@ class HUD extends FlxObject {
 		super.update();
 
 		var selectedInteractor:game.Interactable = Interactable.getInteractor();
+		zAction.size = 14;
 
 		if (selectedInteractor != null) {
 			zAction.text = selectedInteractor.actionString();
@@ -42,7 +43,6 @@ class HUD extends FlxObject {
 				}
 			}
 		} else {
-			zAction.size = 14;
 			flixel.util.FlxSpriteUtil.stopFlickering(zAction);
 			if (Spike.endgameExplained) {
 				zAction.text = "Press z to be awesome.";

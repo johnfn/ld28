@@ -50,7 +50,7 @@ class MenuState extends FlxState
 		add(scroll1);
 		add(scroll2);
 
-		var titleText:FlxText = new FlxText(100, 50, 500, "One True Love", 48);
+		var titleText:FlxText = new FlxText(100, 50, 500, "Only One Shot", 48);
 		titleText.setBorderStyle(FlxText.BORDER_SHADOW, 0, 3);
 		add(titleText);
 

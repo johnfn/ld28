@@ -55,7 +55,7 @@ class Bullet extends FancySprite {
 
 		if (FlxG.overlap(this, Reg.player) || FlxG.overlap(this, game.GirlBot.onlyGirl)) {
 			Reg.player.hitByBullet();
-			if (Reg.player.girlFound) {
+			if (Reg.player.girlFound && !GirlBot.onlyGirl.followToggledOff) {
 				GirlBot.onlyGirl.respawn();
 			}
 			

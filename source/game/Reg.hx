@@ -52,6 +52,8 @@ class Reg {
 	static public var boys:FlxGroup = new FlxGroup();
 	static public var bullets:FlxGroup = new FlxGroup();
 	static public var cannons:FlxGroup = new FlxGroup();
+	static public var crates:FlxGroup = new FlxGroup();
+	static public var switches:FlxGroup = new FlxGroup();
 
 	/** Current game state. */
 	static public var state:FlxState; 

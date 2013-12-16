@@ -164,7 +164,6 @@ class Player extends FlxSprite {
 
 		flixel.util.FlxSpriteUtil.flicker(this, 1.0);
 
-		trace("YOU DIEEEE");
 		Reg.youdieSound.play(true);
 	}
 
@@ -187,10 +186,10 @@ class Player extends FlxSprite {
 
 		updateFollowTrail();
 
-		if (FlxMath.distanceBetween(this, GirlBot.onlyGirl) > 400) {
+		if (FlxMath.distanceBetween(this, GirlBot.onlyGirl) > 300) {
 			Reg.boymusic.volume = 0;
 		} else {
-			Reg.boymusic.volume = Math.min( (400 - FlxMath.distanceBetween(this, GirlBot.onlyGirl)) / 400 , 1);
+			Reg.boymusic.volume = Math.min( (300 - FlxMath.distanceBetween(this, GirlBot.onlyGirl)) / 300 , 1);
 		}
 
 		if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
@@ -216,6 +215,10 @@ class Player extends FlxSprite {
 
 		FlxG.collide(this, Reg.cannons, function(o1:Player, o2:Cannon) {
 			o2.destroy();
+
+			if (this.girlFound) {
+				GirlBot.onlyGirl.wow();
+			}
 			// that.cannonRebound = true; //?
 		}); 
 
@@ -234,6 +237,8 @@ class Player extends FlxSprite {
 		} else {
 			this.onGround = false;
 		}
+
+		FlxG.collide(this, Reg.crates);
 
 		var done:Bool = false;
 		FlxG.overlap(this, Reg.spikes, function(p:FlxSprite, sp:Spike) {

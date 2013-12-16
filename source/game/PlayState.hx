@@ -52,18 +52,29 @@ class PlayState extends FlxState {
             }
         }
 
+        var downwardsCatchGirl:Bool = false;
+
         if (Reg.player.y > (Reg.mapY + 1) * Reg.mapHeight) {
-                Reg.mapY++;
-                change = true;
+            Reg.mapY++;
+            change = true;
+
+            downwardsCatchGirl = true;
         }
 
         if (Reg.player.y < Reg.mapY * Reg.mapHeight) {
-                Reg.mapY--;
-                change = true;
+            Reg.mapY--;
+            change = true;
+
+            downwardsCatchGirl = true;
         }
 
         if (triedToLeave && !canLeave) {
 	        add(new DialogBox(["You can't leave without the girl robot!"]));
+	    }
+
+	    if (Reg.player.girlFound && downwardsCatchGirl) {
+	    	game.GirlBot.onlyGirl.x = Reg.player.x;
+	    	game.GirlBot.onlyGirl.y = Reg.player.y;
 	    }
 
         if (change || forceUpdate) {
@@ -126,7 +137,7 @@ class PlayState extends FlxState {
 
     	if (kv.exists(key)) {
     		var dialog = kv.get(key);
-    		add (new game.DialogBox(dialog));
+    		add(new game.DialogBox(dialog));
     		kv.remove(key);
     	}
 
@@ -193,7 +204,7 @@ class PlayState extends FlxState {
         add(new HUD());
 
 #if debug
-        Reg.mapX = 0;
+        Reg.mapX = 5;
         Reg.mapY = 0;
 #end
 
@@ -205,13 +216,12 @@ class PlayState extends FlxState {
         p.x += Reg.mapX * Reg.mapWidth;
         p.y += Reg.mapY * Reg.mapHeight;
 
-        /*
 #if debug
 		game.GirlBot.onlyGirl.isFollowingPlayer = true;
         game.GirlBot.onlyGirl.x = p.x;
         game.GirlBot.onlyGirl.y = p.y;
+        Reg.player.girlFound = true;
 #end
-		*/
 
         checkUpdateScreen(true);
 
