@@ -25,6 +25,8 @@ class PlayState extends FlxState {
 
 	public var scenery:FlxEmitter;
 
+	public var bogusRunthrough:Bool = false;
+
     public function checkUpdateScreen(forceUpdate:Bool = false) {
         var change:Bool = false;
         var canLeave:Bool = !Reg.player.girlFound || Math.abs(Reg.player.x - cast(Reg.girls.getFirstAlive(), FlxSprite).x) < 100;
@@ -75,6 +77,7 @@ class PlayState extends FlxState {
     }
 
     var kv:Map<String, Array<String>>;
+    var boguskv:Map<String, Array<String>>;
     private function initializeDialog() {
     	kv = [ "0,0" => ["Although you are strong enough to destroy cannons simply by jumping on top of them, you have never obtained what you truly desire from life:", "TRUE LOVE.", "But somewhere out there is the girl for you!", "Well, the girl robot.", "You know, because you're a robot and all."]
 	    	 , "1,0" => ["Unfortunately, you are not strong enough to destroy spikes simply by jumping on them.", "You're still working on that one."]
@@ -85,10 +88,27 @@ class PlayState extends FlxState {
     	     , "2,1" => ["Sometimes you may have to those you love behind behind.", "Toggle whether she follows you with C."]
     	     , "4,2" => ["You win :)"]
     	     ];
+
+	boguskv =[ "0,0" => ["Although you are strong enough to destroy cannons simply by jumping on top of them, you have never obtained what you truly desire from life:", "TRUE LOVE.", "But somewhere out there is the girl for you!", "Well, the girl robot.", "You know, because you're a robot and all."]
+	    	 , "1,0" => ["Unfortunately, you are not strong enough to destroy spikes simply by jumping on them.", "You're still working on that one."]
+    	     , "2,0" => ["It would be pretty cool though.", "Destroying spikes.", "...", "Also finding true love.", "You've certainly got your priorities straight."]
+    	     , "3,0" => ["But finding true love would require a LEAP of faith...", "...", "a LEAP...", "...", "Hint: You may have to take a leap here."]
+    	     , "0,1" => ["You feel like you've forgotten about something...", "Something important..."]
+    	     , "1,1" => ["You calculate (because you're a robot) that if you stomp on 5 cannons...", "You will be 5 times more awesome."]
+    	     , "2,1" => ["More chumps eh?", "Sigh."]
+    	     , "4,2" => ["You win >:O"]
+    	     ];
     }
 
     private function triggerDialog() {
     	var key:String = "" + Reg.mapX + "," + Reg.mapY;
+    	if (key == "0,1") {
+    		if (!Reg.player.girlFound) {
+    			this.bogusRunthrough = true;
+    			kv = boguskv;
+    		}
+    	}
+
     	if (key == "4,2") {
     		game.MusicManager.stop();
 
@@ -173,7 +193,7 @@ class PlayState extends FlxState {
         add(new HUD());
 
 #if debug
-        Reg.mapX = 4;
+        Reg.mapX = 0;
         Reg.mapY = 0;
 #end
 
@@ -185,9 +205,9 @@ class PlayState extends FlxState {
         p.x += Reg.mapX * Reg.mapWidth;
         p.y += Reg.mapY * Reg.mapHeight;
 
-		game.GirlBot.onlyGirl.isFollowingPlayer = true;
         /*
 #if debug
+		game.GirlBot.onlyGirl.isFollowingPlayer = true;
         game.GirlBot.onlyGirl.x = p.x;
         game.GirlBot.onlyGirl.y = p.y;
 #end

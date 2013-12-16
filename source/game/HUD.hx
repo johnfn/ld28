@@ -34,7 +34,16 @@ class HUD extends FlxObject {
 
 		if (selectedInteractor != null) {
 			zAction.text = selectedInteractor.actionString();
+
+			if (zAction.text == "Z to talk") {
+				zAction.size = 36;
+				if (!flixel.util.FlxSpriteUtil.isFlickering(zAction)) {
+					flixel.util.FlxSpriteUtil.flicker(zAction, 99999, .5);
+				}
+			}
 		} else {
+			zAction.size = 14;
+			flixel.util.FlxSpriteUtil.stopFlickering(zAction);
 			if (Spike.endgameExplained) {
 				zAction.text = "Press z to be awesome.";
 			} else {
